@@ -1,5 +1,6 @@
 package com.RJN.ThroughTheAges;
 
+import com.RJN.ThroughTheAges.Actor.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,13 +15,16 @@ import static com.badlogic.gdx.Gdx.graphics;
 
 public class TestStage extends Stage {
     private static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
+    public TestStage(){
+        addActor(new Player());
+    }
 
     public void draw(){
-        super.draw();
         getBatch().begin();
         ShapeDrawer shapeDrawer = new ShapeDrawer(getBatch(), new TextureRegion(whiteTexture));
         shapeDrawer.setColor(new Color(0,0,1,1));
         shapeDrawer.filledRectangle(0,0,graphics.getWidth(),graphics.getHeight());
         getBatch().end();
+        super.draw();
     }
 }
