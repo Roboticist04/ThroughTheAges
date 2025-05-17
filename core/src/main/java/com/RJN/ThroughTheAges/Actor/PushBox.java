@@ -29,15 +29,6 @@ public class PushBox extends Actor {
         this.speed = speed;
     }
 
-    /*public boolean touching() {
-        if () {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }*/
-
     public void moveLeft()  {
         setY(getX()+speed);
     }
