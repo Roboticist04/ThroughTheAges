@@ -1,0 +1,37 @@
+package com.RJN.ThroughTheAges;
+
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
+//import static java.awt.SystemColor.window;
+
+public class MainMenu extends Window{
+    //private Window window;
+
+    public MainMenu(Skin skin, Stage stage){
+        super("Example screen", skin, "border");
+        defaults().pad(4f);
+        add("This is a simple Scene2D view.").row();
+        final TextButton button = new TextButton("Click me!", skin);
+        button.pad(8f);
+        button.addListener(new ChangeListener() {
+            @Override
+            public void changed(final ChangeEvent event, final Actor actor) {
+                button.setText("Clicked.");
+            }
+        });
+        add(button);
+        pack();
+        setPosition(MathUtils.roundPositive(stage.getWidth() / 2f - getWidth() / 2f),
+            MathUtils.roundPositive(stage.getHeight() / 2f - getHeight() / 2f));
+        addAction(Actions.sequence(Actions.alpha(0f), Actions.fadeIn(1f)));
+    }
+
+
+}
