@@ -83,6 +83,7 @@ public abstract class PhysicsActor extends Actor {
     }
 
     public void draw(Batch batch, float parentAlpha){
-        batch.draw(sprite,getX(),getY(),getWidth()*getScaleX(),getHeight()*getScaleY());
+        //batch.draw(sprite,sprite.getX(),sprite.getY(),getWidth(),getHeight());
+        sprite.draw(batch);
     }
 }
