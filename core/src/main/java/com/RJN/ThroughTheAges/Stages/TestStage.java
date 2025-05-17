@@ -19,13 +19,13 @@ import static com.badlogic.gdx.Gdx.graphics;
 
 public class TestStage extends GameStage {
     private PushBox pushBox;
-    private StaticCollidableProp platform;
+    private Platform platform;
 
     public TestStage(World world){
         super(new FitViewport(1920,1080),world);
         //addActor(new Player());
         pushBox = new PushBox(world,500,50);
-        platform = new Platform(world, 1000,600,new Texture(Gdx.files.internal("textures/ground.png")));
+        platform = new Platform( new Texture(Gdx.files.internal("textures/ground.png")),1000,600, 50, 50);
         addActor(pushBox);
         addActor(player);
         addActor(platform);

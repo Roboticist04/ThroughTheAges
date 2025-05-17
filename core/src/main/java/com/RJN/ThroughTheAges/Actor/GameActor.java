@@ -12,6 +12,7 @@ public class GameActor extends Actor {
         sprite.setX(x);
         sprite.setY(y);
         sprite.setScale(xScale,yScale);
+        this.sprite = sprite;
     }
 
     public void draw(Batch batch, float parentAlpha){

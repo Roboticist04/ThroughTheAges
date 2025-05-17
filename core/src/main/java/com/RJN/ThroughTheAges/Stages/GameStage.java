@@ -26,7 +26,8 @@ public class GameStage extends Stage{
         player = new Player();
         addListener(new inListener());
         //createGroundBody(world);
-        ground = new Platform(world, 0, 0,new Texture(Gdx.files.internal("textures/ground.png")), getWidth()*2, 20f);
+        //ground = new Platform(world, 0, 0,new Texture(Gdx.files.internal("textures/ground.png")), getWidth()*2, 20f);
+        ground = new Platform(new Texture(Gdx.files.internal("textures/ground.png")), 0, 0, graphics.getWidth(), 20);
         addActor(ground);
     }
 
