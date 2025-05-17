@@ -8,9 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class PushBox extends Actor {
     private int speed;
 
-    private static final Texture texture = new Texture(Gdx.files.internal("1WhitePixel.png"));
+    private Texture texture;
+
+    public PushBox() {
+        texture = new Texture(Gdx.files.internal("pushbox.png"));
+    }
+
     public void drawBox(Batch batch) {
-        batch.draw(texture,getX(),getY());
+        batch.draw(texture, getX(), getY());
     }
 
     public int getSpeed() {
