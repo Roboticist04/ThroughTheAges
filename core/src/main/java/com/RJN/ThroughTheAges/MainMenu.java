@@ -21,8 +21,8 @@ public class MainMenu extends Window{
         setHeight(stage.getHeight());
         this.main = main;
         defaults().pad(4f);
-        add("This is a simple Scene2D view.").row();
-        final TextButton button = new TextButton("Click me!", skin);
+        add("ThroughTheAges").row();
+        final TextButton button = new TextButton("Play", skin);
         button.pad(8f);
         button.addListener(new ChangeListener() {
             @Override
