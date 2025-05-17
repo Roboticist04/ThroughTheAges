@@ -18,14 +18,17 @@ public class TestStage extends Stage {
     private static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
     private Player player;
 
-    public TestStage(){
+    public TestStage(Player player){
         //addActor(new Player());
-        player = new Player();
+        this.player = player;
         addActor(player);
     }
 
+    public void act(){
+
+    }
+
     public void draw(){
-        processInputs();
         getBatch().begin();
         ShapeDrawer shapeDrawer = new ShapeDrawer(getBatch(), new TextureRegion(whiteTexture));
         shapeDrawer.setColor(new Color(0,0,1,1));
@@ -34,9 +37,5 @@ public class TestStage extends Stage {
         super.draw();
     }
 
-    public void processInputs(){
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-            player.moveUp();
-        }
-    }
+
 }

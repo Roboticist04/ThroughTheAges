@@ -1,7 +1,9 @@
 package com.RJN.ThroughTheAges;
 
+import com.RJN.ThroughTheAges.Actor.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,12 +20,13 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 public class Main extends ApplicationAdapter {
     private Stage stage;
     private Skin skin;
+    private Player player;
 
     @Override
     public void create() {
         stage = new Stage(new FitViewport(640, 480));
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
-
+        player = new Player();
 
         // We round the window position to avoid awkward half-pixel artifacts.
         // Casting using (int) would also work.
@@ -38,6 +41,21 @@ public class Main extends ApplicationAdapter {
         ScreenUtils.clear(0f, 0f, 0f, 1f);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+        processInputs();
+    }
+    public void processInputs(){
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+            player.moveUp();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            player.moveDown();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            player.moveRight();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            player.moveLeft();
+        }
     }
 
     @Override
@@ -52,6 +70,6 @@ public class Main extends ApplicationAdapter {
     }
 
     public void advanceStage(){
-        stage = new TestStage();
+        stage = new TestStage(player);
     }
 }

@@ -39,10 +39,10 @@ public class Player extends Actor {
     }
 
     public void moveLeft(){
-        setY(getX()+speed);
+        setX(getX()-speed);
     }
 
     public void moveRight(){
-        setY(getX()-speed);
+        setX(getX()+speed);
     }
 }
