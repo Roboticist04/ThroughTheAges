@@ -1,5 +1,6 @@
 package com.RJN.ThroughTheAges.Stages;
 
+import com.RJN.ThroughTheAges.Actor.GameActor;
 import com.RJN.ThroughTheAges.Actor.Player;
 import com.RJN.ThroughTheAges.Props.Platform;
 import com.badlogic.gdx.Gdx;
@@ -8,11 +9,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import space.earlygrey.shapedrawer.ShapeDrawer;
+
+import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
@@ -42,6 +47,8 @@ public class GameStage extends Stage{
         super.draw();
     }
 
+
+
     private class inListener extends InputListener{
         public boolean keyUp (InputEvent event, int keycode) {
             if(keycode == Input.Keys.UP){
@@ -58,6 +65,22 @@ public class GameStage extends Stage{
         }
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             player.moveLeft();
+        }
+    }
+
+    public void act(float delta){
+        ArrayList<GameActor> actors = new ArrayList<>();
+        for(Actor a : getActors()){
+            if(a instanceof GameActor){
+                actors.add((GameActor) a);
+            }
+        }
+        for(GameActor a : actors){
+            for(GameActor b : actors){
+                if(a.collidesWith(b)){
+                    a.hit(b);
+                }
+            }
         }
     }
 }

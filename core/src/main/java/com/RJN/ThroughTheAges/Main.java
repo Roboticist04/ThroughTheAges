@@ -79,7 +79,8 @@ public class Main extends ApplicationAdapter{
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height);
+        //stage.getViewport().update(width, height);
+        stages[stageNumber].getViewport().update(width, height);
     }
 
     @Override

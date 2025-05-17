@@ -16,6 +16,8 @@ public class GameActor extends Actor {
     }
 
     public void draw(Batch batch, float parentAlpha){
+        sprite.setX(getX());
+        sprite.setY(getY());
         sprite.draw(batch);
     }
 
@@ -24,4 +26,6 @@ public class GameActor extends Actor {
         Rectangle rect2 = new Rectangle(actor.getX(),actor.getY(),actor.getWidth(),actor.getHeight());
         return rect1.overlaps(rect2);
     }
+
+    public void hit (GameActor gameActor){}
 }
