@@ -23,17 +23,23 @@ public class Main extends ApplicationAdapter{
     private World world;
     private float accumulator = 0;
     private final static float physicsStep = 0.1f;
-    private static final int physicVelocityIterations = 50;
-    private static final int physicsPositionIterations = 50;
+    private static final int physicVelocityIterations = 600;
+    private static final int physicsPositionIterations = 600;
     private PolygonSpriteBatch batch;
     private Box2DDebugRenderer debugRenderer;
+    private Stage[] stages;
+    private int stageNumber;
 
 
     @Override
     public void create() {
-        world = new World(new Vector2(0, -98f), true);
+        world = new World(new Vector2(0, -9.8f), true);
         //stage = new GameStage(new FitViewport(160, 90), world);
         stage = new Stage();
+        stages = new Stage[2];
+        stages[0] = stage;
+        stages[1] = new TestStage(world);
+        stageNumber = 0;
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         //player = new Player(world);
         batch = new PolygonSpriteBatch();
@@ -85,6 +91,8 @@ public class Main extends ApplicationAdapter{
     }
 
     public void advanceStage(){
-        stage = new TestStage(world);
+        stageNumber++;
+        stage = stages[stageNumber];
+        Gdx.input.setInputProcessor(stage);
     }
 }

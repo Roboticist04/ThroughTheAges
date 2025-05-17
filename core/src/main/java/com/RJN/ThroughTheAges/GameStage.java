@@ -20,7 +20,7 @@ public class GameStage extends Stage{
     }
 
     private class inListener extends InputListener{
-        public boolean keyDown (InputEvent event, int keycode) {
+        public boolean keyUp (InputEvent event, int keycode) {
             if(keycode == Input.Keys.UP){
                 player.moveUp();
                 return true;
