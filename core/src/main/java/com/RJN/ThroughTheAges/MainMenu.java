@@ -17,6 +17,8 @@ public class MainMenu extends Window{
 
     public MainMenu(Skin skin, Stage stage, Main main){
         super("Example screen", skin, "border");
+        setWidth(stage.getWidth());
+        setHeight(stage.getHeight());
         this.main = main;
         defaults().pad(4f);
         add("This is a simple Scene2D view.").row();
