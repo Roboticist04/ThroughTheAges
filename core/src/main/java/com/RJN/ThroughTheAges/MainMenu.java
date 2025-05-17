@@ -16,7 +16,7 @@ public class MainMenu extends Window{
     private Main main;
 
     public MainMenu(Skin skin, Stage stage, Main main){
-        super("Example screen", skin, "border");
+        super("Main Menu", skin, "border");
         setWidth(stage.getWidth());
         setHeight(stage.getHeight());
         this.main = main;
