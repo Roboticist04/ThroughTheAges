@@ -46,7 +46,7 @@ public class Player extends Actor {
         fixtureDef.shape = circle;
         fixtureDef.density = 0.5f;
         fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 0.6f; // Make it bounce a little bit
+        fixtureDef.restitution = 0f; // Make it bounce a little bit
 
     // Create our fixture and attach it to the body
         Fixture fixture = body.createFixture(fixtureDef);
@@ -66,7 +66,8 @@ public class Player extends Actor {
 
     public void moveUp(){
         //setY(getY()+speed);
-        body.applyLinearImpulse(0f,speed,getX(),getY(),false);
+        //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);
+        body.applyForceToCenter(0,500,true);
     }
 
     public void moveDown(){

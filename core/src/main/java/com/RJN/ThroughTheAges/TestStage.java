@@ -44,7 +44,7 @@ public class TestStage extends Stage {
         PolygonShape groundBox = new PolygonShape();
 // Set the polygon shape as a box which is twice the size of our view port and 20 high
 // (setAsBox takes half-width and half-height as arguments)
-        groundBox.setAsBox(getCamera().viewportWidth, 10.0f);
+        groundBox.setAsBox(getCamera().viewportWidth, 40.0f);
 // Create a fixture from our polygon shape and add it to our ground body
         groundBody.createFixture(groundBox, 0.0f);
 // Clean up after ourselves
@@ -61,7 +61,7 @@ public class TestStage extends Stage {
         shapeDrawer.setColor(new Color(0,0,1,1));
         shapeDrawer.filledRectangle(0,0,graphics.getWidth(),graphics.getHeight());
         shapeDrawer.setColor(new Color(0,1,0,1));
-        shapeDrawer.filledRectangle(0,0,getCamera().viewportWidth, 10.0f);
+        shapeDrawer.filledRectangle(0,0,getCamera().viewportWidth, 20.0f);
         getBatch().end();
         super.draw();
     }

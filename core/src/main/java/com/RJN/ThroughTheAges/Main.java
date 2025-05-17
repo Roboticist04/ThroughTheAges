@@ -4,6 +4,8 @@ import com.RJN.ThroughTheAges.Actor.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,17 +20,19 @@ public class Main extends ApplicationAdapter {
     private Player player;
     private World world;
     private float accumulator = 0;
-    private final float physicsStep = 0.1f;
-    private final int physicVelocityIterations = 3;
-    private final int physicsPositionIterations = 3;
+    private final float physicsStep = 0.01f;
+    private final int physicVelocityIterations = 5;
+    private final int physicsPositionIterations = 5;
+    private PolygonSpriteBatch batch;
 
 
     @Override
     public void create() {
         stage = new Stage(new FitViewport(160, 90));
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
-        world = new World(new Vector2(0, -1), true);
+        world = new World(new Vector2(0, -10), true);
         player = new Player(world);
+        batch = new PolygonSpriteBatch();
         // We round the window position to avoid awkward half-pixel artifacts.
         // Casting using (int) would also work.
 
@@ -39,11 +43,15 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
+        batch.begin();
         ScreenUtils.clear(0f, 0f, 0f, 1f);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+        BitmapFont font = new BitmapFont();
+        font.draw(batch,"FPS: "+Gdx.graphics.getFramesPerSecond(),20,20);
         processInputs();
         updatePhysics(Gdx.graphics.getDeltaTime());
+        batch.end();
     }
 
     public void updatePhysics(float deltaTime){
