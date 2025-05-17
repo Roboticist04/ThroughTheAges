@@ -20,6 +20,7 @@ public class StaticCollidableProp extends Actor {
         setBounds(x*getScaleX(),y*getScaleY(),sprite.getWidth()*getScaleX(),sprite.getHeight()*getScaleY());
         this.body = defineBody(world);
         this.sprite = sprite;
+        body.setTransform(x+(0.5f*getWidth()),y+(0.5f*getHeight()),getRotation());
         //this.sprite.setScale(getScaleX(),getScaleY());
     }
 
