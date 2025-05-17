@@ -17,7 +17,7 @@ public class PushBox extends Actor {
             region.getRegionWidth(), region.getRegionHeight());
     }
 
-    public void drawBox(Batch batch) {
+    public void draw(Batch batch, float parentAlpha) {
         batch.draw(region, getX(), getY());
     }
 
