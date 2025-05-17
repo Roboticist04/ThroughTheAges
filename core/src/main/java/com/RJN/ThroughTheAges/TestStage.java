@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import static com.badlogic.gdx.Gdx.graphics;
@@ -25,10 +26,12 @@ public class TestStage extends Stage {
     private Body groundBody;
 
     public TestStage(Player player, World world){
+        super(new FitViewport(1920,1080));
         //addActor(new Player());
         createGroundBody(world);
         this.player = player;
         addActor(player);
+
     }
 
     public void createGroundBody(World world){
@@ -44,7 +47,7 @@ public class TestStage extends Stage {
         PolygonShape groundBox = new PolygonShape();
 // Set the polygon shape as a box which is twice the size of our view port and 20 high
 // (setAsBox takes half-width and half-height as arguments)
-        groundBox.setAsBox(getCamera().viewportWidth, 40.0f);
+        groundBox.setAsBox(getCamera().viewportWidth, 20.0f);
 // Create a fixture from our polygon shape and add it to our ground body
         groundBody.createFixture(groundBox, 0.0f);
 // Clean up after ourselves
@@ -61,7 +64,7 @@ public class TestStage extends Stage {
         shapeDrawer.setColor(new Color(0,0,1,1));
         shapeDrawer.filledRectangle(0,0,graphics.getWidth(),graphics.getHeight());
         shapeDrawer.setColor(new Color(0,1,0,1));
-        shapeDrawer.filledRectangle(0,0,getCamera().viewportWidth, 20.0f);
+        shapeDrawer.filledRectangle(0,0,getCamera().viewportWidth, 40.0f);
         getBatch().end();
         super.draw();
     }

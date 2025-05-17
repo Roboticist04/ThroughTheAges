@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
@@ -18,12 +19,14 @@ public class Player extends Actor {
     private Body body;
 
     public Player (World world) {
-        createBody(world);
-        TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("textures/redSword.png")));
+        TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("textures/Player.png")),500,500);
         setBounds(region.getRegionX(), region.getRegionY(),
             region.getRegionWidth(), region.getRegionHeight());
+        //setWidth(500);
+        //setHeight(500);
         speed = 5;
         sprite = new Sprite(region);
+        createBody(world);
     }
 
     protected void createBody(World world){
@@ -32,19 +35,19 @@ public class Player extends Actor {
     // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
         bodyDef.type = BodyDef.BodyType.DynamicBody;
     // Set our body's starting position in the world
-        bodyDef.position.set(30, 60);
+        bodyDef.position.set(300, 600);
 
     // Create our body in the world using our body definition
         body = world.createBody(bodyDef);
 
-    // Create a circle shape and set its radius to 6
-        CircleShape circle = new CircleShape();
-        circle.setRadius(6f);
+        PolygonShape polyShape = new PolygonShape();
+        System.out.println("Width: "+getWidth()+", Height: "+getHeight());
+        polyShape.setAsBox(getWidth(),getHeight());
 
     // Create a fixture definition to apply our shape to
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = circle;
-        fixtureDef.density = 0.5f;
+        fixtureDef.shape = polyShape;
+        fixtureDef.density = 0.2f;
         fixtureDef.friction = 0.4f;
         fixtureDef.restitution = 0f; // Make it bounce a little bit
 
@@ -53,7 +56,7 @@ public class Player extends Actor {
 
     // Remember to dispose of any shapes after you're done with them!
     // BodyDef and FixtureDef don't need disposing, but shapes do.
-        circle.dispose();
+        polyShape.dispose();
     }
 
     @Override
@@ -67,7 +70,7 @@ public class Player extends Actor {
     public void moveUp(){
         //setY(getY()+speed);
         //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);
-        body.applyForceToCenter(0,500,true);
+        body.applyForceToCenter(new Vector2(0,10000),false);
     }
 
     public void moveDown(){

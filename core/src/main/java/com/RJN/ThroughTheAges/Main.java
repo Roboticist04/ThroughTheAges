@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -24,6 +25,7 @@ public class Main extends ApplicationAdapter {
     private final int physicVelocityIterations = 5;
     private final int physicsPositionIterations = 5;
     private PolygonSpriteBatch batch;
+    private Box2DDebugRenderer debugRenderer;
 
 
     @Override
@@ -33,6 +35,7 @@ public class Main extends ApplicationAdapter {
         world = new World(new Vector2(0, -10), true);
         player = new Player(world);
         batch = new PolygonSpriteBatch();
+        debugRenderer = new Box2DDebugRenderer();
         // We round the window position to avoid awkward half-pixel artifacts.
         // Casting using (int) would also work.
 
@@ -50,8 +53,9 @@ public class Main extends ApplicationAdapter {
         BitmapFont font = new BitmapFont();
         font.draw(batch,"FPS: "+Gdx.graphics.getFramesPerSecond(),20,20);
         processInputs();
-        updatePhysics(Gdx.graphics.getDeltaTime());
         batch.end();
+        debugRenderer.render(world,stage.getCamera().combined);
+        updatePhysics(Gdx.graphics.getDeltaTime());
     }
 
     public void updatePhysics(float deltaTime){
