@@ -21,17 +21,15 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
-public class TestStage extends Stage {
+public class TestStage extends GameStage {
     private static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
-    private Player player;
     private Body groundBody;
     private PushBox Box;
 
-    public TestStage(Player player, World world){
-        super(new FitViewport(1920,1080));
+    public TestStage(World world){
+        super(new FitViewport(1920,1080),world);
         //addActor(new Player());
         createGroundBody(world);
-        this.player = player;
         addActor(player);
 
     }

@@ -80,12 +80,12 @@ public class Player extends Actor {
     }
 
     public void moveLeft(){
-        setX(getX()-speed);
+        body.applyForceToCenter(-5000,0,true);
     }
 
     public void moveRight(){
         //setX(getX()+speed);
-        body.applyForceToCenter(500,0,true);
+        body.applyForceToCenter(5000,0,true);
     }
 
     public void act(float delta){

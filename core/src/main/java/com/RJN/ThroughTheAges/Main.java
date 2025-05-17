@@ -4,6 +4,7 @@ import com.RJN.ThroughTheAges.Actor.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -15,10 +16,10 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class Main extends ApplicationAdapter {
+public class Main extends ApplicationAdapter{
     private Stage stage;
     private Skin skin;
-    private Player player;
+    //private Player player;
     private World world;
     private float accumulator = 0;
     private final static float physicsStep = 0.1f;
@@ -30,17 +31,15 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void create() {
-        stage = new Stage(new FitViewport(160, 90));
+        world = new World(new Vector2(0, -98f), true);
+        stage = new GameStage(new FitViewport(160, 90), world);
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
-        world = new World(new Vector2(0, -10), true);
-        player = new Player(world);
+        //player = new Player(world);
         batch = new PolygonSpriteBatch();
         debugRenderer = new Box2DDebugRenderer();
         // We round the window position to avoid awkward half-pixel artifacts.
         // Casting using (int) would also work.
-
         stage.addActor(new MainMenu(skin,stage,this));
-
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -52,7 +51,9 @@ public class Main extends ApplicationAdapter {
         stage.draw();
         BitmapFont font = new BitmapFont();
         font.draw(batch,"FPS: "+Gdx.graphics.getFramesPerSecond(),20,20);
-        processInputs();
+        if(stage instanceof GameStage) {
+            ((GameStage)(stage)).processInputs();
+        }
         batch.end();
         debugRenderer.render(world,stage.getCamera().combined);
         updatePhysics(Gdx.graphics.getDeltaTime());
@@ -69,20 +70,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
-    public void processInputs(){
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-            player.moveUp();
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            player.moveDown();
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            player.moveRight();
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            player.moveLeft();
-        }
-    }
+
 
     @Override
     public void resize(int width, int height) {
@@ -96,6 +84,6 @@ public class Main extends ApplicationAdapter {
     }
 
     public void advanceStage(){
-        stage = new TestStage(player, world);
+        stage = new TestStage(world);
     }
 }
