@@ -27,6 +27,7 @@ public abstract class PhysicsActor extends Actor {
         BodyDef bodyDef = new BodyDef();
         // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
         bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.fixedRotation = true;
         // Set our body's starting position in the world
         bodyDef.position.set(getX(), getY());
 

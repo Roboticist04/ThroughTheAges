@@ -74,9 +74,6 @@ public class GameStage extends Stage{
     }
 
     public void processInputs(){
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            player.moveDown();
-        }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             player.moveRight();
         }

@@ -13,15 +13,16 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-public class Player extends Actor {
+public class Player extends PhysicsActor {
     private float speed;
-    private Sprite sprite;
-    private Body body;
+    //private Sprite sprite;
+    //private Body body;
 
     public Player (World world) {
+        super(world,new Sprite(new Texture(Gdx.files.internal("Textures/Player.png"))), 60, 60);
         //TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("textures/Player.png")),500,500);
-        TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("Textures/Player.png")));
-        sprite = new Sprite(region,0,0,region.getRegionWidth(),region.getRegionHeight());
+        //TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("Textures/Player.png")));
+        //sprite = new Sprite(region,0,0,region.getRegionWidth(),region.getRegionHeight());
         sprite.setScale(0.5f,0.5f);
         /*setBounds(region.getRegionX(), region.getRegionY(),
             region.getRegionWidth(), region.getRegionHeight());*/
@@ -30,7 +31,7 @@ public class Player extends Actor {
         //setHeight(500);
         speed = 5;
 
-        createBody(world);
+        //createBody(world);
     }
 
     protected void createBody(World world){
@@ -64,13 +65,13 @@ public class Player extends Actor {
         polyShape.dispose();
     }
 
-    @Override
-    public void draw (Batch batch, float parentAlpha) {
+    //@Override
+    /*public void draw (Batch batch, float parentAlpha) {
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
         //batch.draw(resgion, getX(), getY(), getOriginX(), getOriginY(),getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
         sprite.draw(batch);
-    }
+    }*/
 
     public void moveUp(){
         //setY(getY()+speed);
@@ -79,20 +80,12 @@ public class Player extends Actor {
             body.applyForceToCenter(new Vector2(0, 500000000), true);
     }
 
-    public void moveDown(){
-        setY(getY()-speed);
-    }
-
     public void moveLeft(){
-        body.applyForceToCenter(-5000,0,true);
+        body.applyForceToCenter(-50000,0,true);
     }
 
     public void moveRight(){
         //setX(getX()+speed);
-        body.applyForceToCenter(5000,0,true);
-    }
-
-    public void act(float delta){
-
+        body.applyForceToCenter(50000,0,true);
     }
 }
