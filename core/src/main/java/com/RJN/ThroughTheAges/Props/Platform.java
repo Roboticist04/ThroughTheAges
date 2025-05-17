@@ -7,7 +7,16 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Platform extends StaticCollidableProp {
 
-    public Platform(World world, int x, int y, Texture texture) {
-        super(world, new Sprite(texture), x, y);
+    public Platform(World world, int x, int y, Texture texture, float width, float height) {
+        super(world, new Sprite(getRepeatingTexture(texture)), x, y, (width/texture.getWidth()),(height/texture.getHeight()));
+    }
+
+    public Platform(World world, int x, int y, Texture texture){
+        super(world,new Sprite(getRepeatingTexture(texture)), x, y);
+    }
+
+    private static Texture getRepeatingTexture(Texture texture){
+        texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        return texture;
     }
 }
