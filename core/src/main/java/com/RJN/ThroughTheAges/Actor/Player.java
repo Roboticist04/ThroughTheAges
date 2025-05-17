@@ -93,18 +93,6 @@ public class Player extends Actor {
     }
 
     public void act(float delta){
-        Vector2 position = body.getPosition();
-        // Center body is center sprite here
-        float hw = sprite.getWidth() / 2.0f;
-        float hh = sprite.getHeight() / 2.0f;
-        float a = body.getAngle() * MathUtils.radiansToDegrees;
-        float x = position.x - hw;
-        float y = position.y - hh;
 
-        sprite.setPosition(x, y);
-        sprite.setRotation(a);
-        setX(x);
-        setY(y);
-        setRotation(a);
     }
 }

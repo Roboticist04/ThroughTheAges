@@ -1,37 +1,34 @@
-package com.RJN.ThroughTheAges;
+package com.RJN.ThroughTheAges.Stages;
 
 import com.RJN.ThroughTheAges.Actor.Player;
-import com.RJN.ThroughTheAges.Actor.PushBox;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
-public class TestStage extends GameStage {
-    private static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
+public class GameStage extends Stage{
+    protected Player player;
     private Body groundBody;
-    private PushBox Box;
+    private static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
 
-    public TestStage(World world){
-        super(new FitViewport(1920,1080),world);
-        //addActor(new Player());
+    public GameStage(Viewport viewport, World world) {
+        super(viewport);
+        player = new Player(world);
+        addListener(new inListener());
         createGroundBody(world);
-        addActor(player);
-
     }
 
     public void createGroundBody(World world){
@@ -54,10 +51,7 @@ public class TestStage extends GameStage {
         groundBox.dispose();
     }
 
-    public void act(){
-
-    }
-
+    @Override
     public void draw(){
         getBatch().begin();
         ShapeDrawer shapeDrawer = new ShapeDrawer(getBatch(), new TextureRegion(whiteTexture));
@@ -69,5 +63,25 @@ public class TestStage extends GameStage {
         super.draw();
     }
 
+    private class inListener extends InputListener{
+        public boolean keyUp (InputEvent event, int keycode) {
+            if(keycode == Input.Keys.UP){
+                player.moveUp();
+                return true;
+            }
+            return false;
+        }
+    }
 
+    public void processInputs(){
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            player.moveDown();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            player.moveRight();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            player.moveLeft();
+        }
+    }
 }
