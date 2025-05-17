@@ -28,7 +28,7 @@ public class Main extends ApplicationAdapter {
         // We round the window position to avoid awkward half-pixel artifacts.
         // Casting using (int) would also work.
 
-        stage.addActor(new MainMenu(skin,stage));
+        stage.addActor(new MainMenu(skin,stage,this));
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -49,5 +49,9 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+    }
+
+    public void advanceStage(){
+        stage = new TestStage();
     }
 }

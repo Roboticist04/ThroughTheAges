@@ -13,9 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class MainMenu extends Window{
     //private Window window;
+    private Main main;
 
-    public MainMenu(Skin skin, Stage stage){
+    public MainMenu(Skin skin, Stage stage, Main main){
         super("Example screen", skin, "border");
+        this.main = main;
         defaults().pad(4f);
         add("This is a simple Scene2D view.").row();
         final TextButton button = new TextButton("Click me!", skin);
@@ -24,6 +26,7 @@ public class MainMenu extends Window{
             @Override
             public void changed(final ChangeEvent event, final Actor actor) {
                 button.setText("Clicked.");
+                main.advanceStage();
             }
         });
         add(button);
