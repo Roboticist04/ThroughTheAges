@@ -21,12 +21,15 @@ public class Player extends Actor {
     public Player (World world) {
         //TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("textures/Player.png")),500,500);
         TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("Textures/Player.png")));
-        setBounds(region.getRegionX(), region.getRegionY(),
-            region.getRegionWidth(), region.getRegionHeight());
+        sprite = new Sprite(region,0,0,region.getRegionWidth(),region.getRegionHeight());
+        sprite.setScale(0.5f,0.5f);
+        /*setBounds(region.getRegionX(), region.getRegionY(),
+            region.getRegionWidth(), region.getRegionHeight());*/
+        setBounds(sprite.getX()*sprite.getScaleX(), sprite.getY()*sprite.getScaleY(),sprite.getWidth()*sprite.getScaleX(),sprite.getHeight()*sprite.getScaleY());
         //setWidth(500);
         //setHeight(500);
         speed = 5;
-        sprite = new Sprite(region);
+
         createBody(world);
     }
 
@@ -36,7 +39,7 @@ public class Player extends Actor {
     // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
         bodyDef.type = BodyDef.BodyType.DynamicBody;
     // Set our body's starting position in the world
-        bodyDef.position.set(300, 600);
+        bodyDef.position.set(300, 300);
 
     // Create our body in the world using our body definition
         body = world.createBody(bodyDef);
@@ -72,7 +75,8 @@ public class Player extends Actor {
     public void moveUp(){
         //setY(getY()+speed);
         //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);
-        body.applyForceToCenter(new Vector2(0,10000),true);
+        //Nasty Hack
+            body.applyForceToCenter(new Vector2(0, 500000), true);
     }
 
     public void moveDown(){

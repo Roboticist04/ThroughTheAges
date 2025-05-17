@@ -86,5 +86,6 @@ public class Main extends ApplicationAdapter{
 
     public void advanceStage(){
         stage = new TestStage(world);
+        Gdx.input.setInputProcessor(stage);
     }
 }
