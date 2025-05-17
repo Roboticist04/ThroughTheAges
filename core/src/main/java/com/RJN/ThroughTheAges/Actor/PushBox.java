@@ -11,6 +11,7 @@ public class PushBox extends Actor {
     private Texture texture;
 
     public PushBox() {
+
         texture = new Texture(Gdx.files.internal("pushbox.png"));
     }
 
@@ -25,15 +26,6 @@ public class PushBox extends Actor {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-
-    /*public boolean touching() {
-        if () {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }*/
 
     public void moveLeft()  {
         setY(getX()+speed);
