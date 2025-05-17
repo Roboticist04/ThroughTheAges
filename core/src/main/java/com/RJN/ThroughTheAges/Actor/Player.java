@@ -19,7 +19,8 @@ public class Player extends Actor {
     private Body body;
 
     public Player (World world) {
-        TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("textures/Player.png")),500,500);
+        //TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("textures/Player.png")),500,500);
+        TextureRegion region = new TextureRegion(new Texture(Gdx.files.internal("Textures/Player.png")));
         setBounds(region.getRegionX(), region.getRegionY(),
             region.getRegionWidth(), region.getRegionHeight());
         //setWidth(500);
@@ -42,17 +43,18 @@ public class Player extends Actor {
 
         PolygonShape polyShape = new PolygonShape();
         System.out.println("Width: "+getWidth()+", Height: "+getHeight());
-        polyShape.setAsBox(getWidth(),getHeight());
+        polyShape.setAsBox(getWidth()/2,getHeight()/2);
 
     // Create a fixture definition to apply our shape to
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polyShape;
-        fixtureDef.density = 0.2f;
+        fixtureDef.density = 0.001f;
         fixtureDef.friction = 0.4f;
         fixtureDef.restitution = 0f; // Make it bounce a little bit
 
     // Create our fixture and attach it to the body
         Fixture fixture = body.createFixture(fixtureDef);
+        System.out.println("Player mass: "+body.getMass());
 
     // Remember to dispose of any shapes after you're done with them!
     // BodyDef and FixtureDef don't need disposing, but shapes do.
@@ -70,7 +72,7 @@ public class Player extends Actor {
     public void moveUp(){
         //setY(getY()+speed);
         //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);
-        body.applyForceToCenter(new Vector2(0,10000),false);
+        body.applyForceToCenter(new Vector2(0,10000),true);
     }
 
     public void moveDown(){
@@ -82,7 +84,8 @@ public class Player extends Actor {
     }
 
     public void moveRight(){
-        setX(getX()+speed);
+        //setX(getX()+speed);
+        body.applyForceToCenter(500,0,true);
     }
 
     public void act(float delta){

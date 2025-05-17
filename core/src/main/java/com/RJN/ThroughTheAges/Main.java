@@ -21,9 +21,9 @@ public class Main extends ApplicationAdapter {
     private Player player;
     private World world;
     private float accumulator = 0;
-    private final float physicsStep = 0.01f;
-    private final int physicVelocityIterations = 5;
-    private final int physicsPositionIterations = 5;
+    private final static float physicsStep = 0.1f;
+    private static final int physicVelocityIterations = 50;
+    private static final int physicsPositionIterations = 50;
     private PolygonSpriteBatch batch;
     private Box2DDebugRenderer debugRenderer;
 
