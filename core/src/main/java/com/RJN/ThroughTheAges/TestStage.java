@@ -47,7 +47,7 @@ public class TestStage extends GameStage {
         PolygonShape groundBox = new PolygonShape();
 // Set the polygon shape as a box which is twice the size of our view port and 20 high
 // (setAsBox takes half-width and half-height as arguments)
-        groundBox.setAsBox(getCamera().viewportWidth, 20.0f);
+        groundBox.setAsBox(getCamera().viewportWidth, 40.0f);
 // Create a fixture from our polygon shape and add it to our ground body
         groundBody.createFixture(groundBox, 0.0f);
 // Clean up after ourselves

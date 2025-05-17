@@ -39,7 +39,7 @@ public class Player extends Actor {
     // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
         bodyDef.type = BodyDef.BodyType.DynamicBody;
     // Set our body's starting position in the world
-        bodyDef.position.set(300, 300);
+        bodyDef.position.set(300, 150);
 
     // Create our body in the world using our body definition
         body = world.createBody(bodyDef);
@@ -52,7 +52,7 @@ public class Player extends Actor {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polyShape;
         fixtureDef.density = 0.001f;
-        fixtureDef.friction = 0.4f;
+        fixtureDef.friction = 0.8f;
         fixtureDef.restitution = 0f; // Make it bounce a little bit
 
     // Create our fixture and attach it to the body
@@ -76,7 +76,7 @@ public class Player extends Actor {
         //setY(getY()+speed);
         //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);
         //Nasty Hack
-            body.applyForceToCenter(new Vector2(0, 500000), true);
+            body.applyForceToCenter(new Vector2(0, 500000000), true);
     }
 
     public void moveDown(){
