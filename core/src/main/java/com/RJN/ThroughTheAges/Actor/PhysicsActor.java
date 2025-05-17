@@ -15,11 +15,23 @@ public abstract class PhysicsActor extends Actor {
 
     protected PhysicsActor(World world, Sprite sprite, int startX, int startY){
         this.world = world;
-        this.sprite = sprite;
         sprite.setX(startX);
         sprite.setY(startY);
-        setBounds(startX,startY,sprite.getWidth(),sprite.getHeight());
+        setScale(sprite.getScaleX(),sprite.getScaleY());
+        setBounds(startX*getScaleX(),startY*getScaleY(),sprite.getWidth()*getScaleX(),sprite.getHeight()*getScaleY());
         this.body = defineBody(world);
+        this.sprite = sprite;
+        //this.sprite.setScale(getScaleX(),getScaleY());
+    }
+
+    protected PhysicsActor(World world, Sprite sprite, int startX, int startY, float xScale, float yScale){
+        //sprite.setScale(xScale,yScale);
+        this(world,setSpriteScale(sprite,xScale,yScale),startX,startY);
+    }
+
+    private static Sprite setSpriteScale(Sprite sprite,float xScale, float yScale){
+        sprite.setScale(xScale,yScale);
+        return sprite;
     }
 
     protected Body defineBody(World world){
@@ -71,6 +83,6 @@ public abstract class PhysicsActor extends Actor {
     }
 
     public void draw(Batch batch, float parentAlpha){
-        batch.draw(sprite,getX(),getY());
+        batch.draw(sprite,getX(),getY(),getWidth()*getScaleX(),getHeight()*getScaleY());
     }
 }
