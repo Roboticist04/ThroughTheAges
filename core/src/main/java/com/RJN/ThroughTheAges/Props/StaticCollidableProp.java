@@ -1,30 +1,29 @@
-package com.RJN.ThroughTheAges.Actor;
+package com.RJN.ThroughTheAges.Props;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Affine2;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public abstract class PhysicsActor extends Actor {
+public class StaticCollidableProp extends Actor {
     protected World world;
     protected Sprite sprite;
     protected Body body;
 
-    protected PhysicsActor(World world, Sprite sprite, int startX, int startY){
+    protected StaticCollidableProp(World world, Sprite sprite, int x, int y){
         this.world = world;
-        sprite.setX(startX);
-        sprite.setY(startY);
+        sprite.setX(x);
+        sprite.setY(y);
         setScale(sprite.getScaleX(),sprite.getScaleY());
-        setBounds(startX*getScaleX(),startY*getScaleY(),sprite.getWidth()*getScaleX(),sprite.getHeight()*getScaleY());
+        setX(x);
+        setY(y);
+        setBounds(x*getScaleX(),y*getScaleY(),sprite.getWidth()*getScaleX(),sprite.getHeight()*getScaleY());
         this.body = defineBody(world);
         this.sprite = sprite;
         //this.sprite.setScale(getScaleX(),getScaleY());
     }
 
-    protected PhysicsActor(World world, Sprite sprite, int startX, int startY, float xScale, float yScale){
+    protected StaticCollidableProp(World world, Sprite sprite, int startX, int startY, float xScale, float yScale){
         //sprite.setScale(xScale,yScale);
         this(world,setSpriteScale(sprite,xScale,yScale),startX,startY);
     }
@@ -38,7 +37,7 @@ public abstract class PhysicsActor extends Actor {
         // First we create a body definition
         BodyDef bodyDef = new BodyDef();
         // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.fixedRotation = true;
         // Set our body's starting position in the world
         bodyDef.position.set(getX(), getY());
@@ -68,20 +67,6 @@ public abstract class PhysicsActor extends Actor {
     }
 
     @Override
-    public void act(float delta){
-        Vector2 position = body.getPosition();
-        float hw = sprite.getWidth() / 2.0f;
-        float hh = sprite.getHeight() / 2.0f;
-        float a = body.getAngle() * MathUtils.radiansToDegrees;
-        float x = position.x - hw;
-        float y = position.y - hh;
-        sprite.setPosition(x, y);
-        sprite.setRotation(a);
-        setX(x);
-        setY(y);
-        setRotation(a);
-    }
-
     public void draw(Batch batch, float parentAlpha){
         //batch.draw(sprite,sprite.getX(),sprite.getY(),getWidth(),getHeight());
         sprite.draw(batch);
