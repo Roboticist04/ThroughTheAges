@@ -1,5 +1,6 @@
 package com.RJN.ThroughTheAges.Actor;
 
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class platform extends Actor {
@@ -13,4 +14,40 @@ public class platform extends Actor {
 
     }
 
+    public void draw(Graphics g) {
+       // g.drawRect(lX, lY, width, height);
+    }
+
+    public int getlY() {
+        return lY;
+    }
+
+    public void setlY(int lY) {
+        this.lY = lY;
+    }
+
+    public int getlX() {
+        return lX;
+    }
+
+    public void setlX(int lX) {
+        this.lX = lX;
+    }
+
+    @Override
+    public int getHeight() {        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
 }
