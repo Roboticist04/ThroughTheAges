@@ -6,25 +6,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class PushBox extends Actor {
-    private int X;
-    private int Y;
     private int speed;
-}private static final Texture texture = new Texture(Gdx.files.internal("1WhitePixel.png"));
+
+    private static final Texture texture = new Texture(Gdx.files.internal("1WhitePixel.png"));
     public void drawBox(Batch batch) {
         batch.draw(texture,getX(),getY());
-    }
-
-    public int getX() {
-        return X;
-    }
-    public int getY() {
-        return Y;
-    }
-    public void setX(int aX) {
-        X = aX;
-    }
-    public void setY(int aY) {
-        Y = aY;
     }
 
     public int getSpeed() {
@@ -53,3 +39,4 @@ public class PushBox extends Actor {
     }
 
 }
+
