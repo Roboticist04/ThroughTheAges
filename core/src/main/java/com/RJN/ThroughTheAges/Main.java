@@ -32,7 +32,8 @@ public class Main extends ApplicationAdapter{
     @Override
     public void create() {
         world = new World(new Vector2(0, -98f), true);
-        stage = new GameStage(new FitViewport(160, 90), world);
+        //stage = new GameStage(new FitViewport(160, 90), world);
+        stage = new Stage();
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         //player = new Player(world);
         batch = new PolygonSpriteBatch();
