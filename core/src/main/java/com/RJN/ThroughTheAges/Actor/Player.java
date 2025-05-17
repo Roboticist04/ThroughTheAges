@@ -23,11 +23,11 @@ public class Player extends PhysicsActor {
     }
 
     public void moveLeft(){
-        body.applyForceToCenter(-50000,0,true);
+        body.applyForceToCenter(-50000000,0,true);
     }
 
     public void moveRight(){
         //setX(getX()+speed);
-        body.applyForceToCenter(50000,0,true);
+        body.applyForceToCenter(50000000,0,true);
     }
 }

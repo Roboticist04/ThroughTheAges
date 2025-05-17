@@ -7,8 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -29,6 +28,41 @@ public class GameStage extends Stage{
         //createGroundBody(world);
         ground = new Platform(world, 0, 0,new Texture(Gdx.files.internal("textures/ground.png")), getWidth()*2, 20f);
         addActor(ground);
+        setupEdgeCollision(world);
+    }
+
+    private void setupEdgeCollision(World world){
+        //Left
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.fixedRotation = true;
+        bodyDef.position.set(-10, 0);
+        Body body = world.createBody(bodyDef);
+        PolygonShape polyShape = new PolygonShape();
+        polyShape.setAsBox(5, graphics.getHeight()/2f);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = polyShape;
+        fixtureDef.density = 0.001f;
+        fixtureDef.friction = 0.8f;
+        fixtureDef.restitution = 0f;
+        body.createFixture(fixtureDef);
+        polyShape.dispose();
+
+        //Right
+        BodyDef bodyDef2 = new BodyDef();
+        bodyDef2.type = BodyDef.BodyType.StaticBody;
+        bodyDef2.fixedRotation = true;
+        bodyDef2.position.set(-10, 0);
+        Body body2 = world.createBody(bodyDef2);
+        PolygonShape polyShape2 = new PolygonShape();
+        polyShape.setAsBox(5, graphics.getHeight()/2f);
+        FixtureDef fixtureDef2 = new FixtureDef();
+        fixtureDef2.shape = polyShape2;
+        fixtureDef2.density = 0.001f;
+        fixtureDef2.friction = 0.8f;
+        fixtureDef2.restitution = 0f;
+        body.createFixture(fixtureDef2);
+        polyShape2.dispose();
     }
 
     @Override
