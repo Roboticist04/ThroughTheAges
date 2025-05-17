@@ -3,19 +3,22 @@ package com.RJN.ThroughTheAges.Actor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class PushBox extends Actor {
     private int speed;
 
-    private Texture texture;
+    private TextureRegion region;
 
     public PushBox() {
-        texture = new Texture(Gdx.files.internal("pushbox.png"));
+        region = new TextureRegion(new Texture(Gdx.files.internal("pushbox.png")));
+        setBounds(region.getRegionX(), region.getRegionY(),
+            region.getRegionWidth(), region.getRegionHeight());
     }
 
     public void drawBox(Batch batch) {
-        batch.draw(texture, getX(), getY());
+        batch.draw(region, getX(), getY());
     }
 
     public int getSpeed() {
