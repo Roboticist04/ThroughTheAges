@@ -1,0 +1,98 @@
+Index: core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.RJN.ThroughTheAges.Actor;\n\nimport com.badlogic.gdx.Gdx;\nimport com.badlogic.gdx.graphics.Texture;\nimport com.badlogic.gdx.graphics.g2d.TextureRegion;\n\npublic class Player extends GameActor {\n    //private Sprite sprite;\n    private static final float speed = 2.75f;\n    private static final float jumpStrength = 6f;\n    private float yVelocity;\n    private float xVelocity;\n    private float lefVelocity;\n    private float rightVelocity;\n    //private Body body;\n\n    public Player () {\n        super(new TextureRegion(new Texture(Gdx.files.internal(\"Textures/Player.png\"))),20, 20,29.4f,59.7f);\n        //super(world,new Sprite(new Texture(Gdx.files.internal(\"Textures/Player.png\"))), 60, 60,0.3f,0.3f);\n        //Texture texture = new Texture(\"textures/Player.png\");\n        //setBounds(sprite.getX()*sprite.getScaleX(), sprite.getY()*sprite.getScaleY(),sprite.getWidth()*sprite.getScaleX(),sprite.getHeight()*sprite.getScaleY());\n        yVelocity = 0;\n        xVelocity = 0;\n    }\n\n    public void moveUp(){\n        //setY(getY()+speed);\n        //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);\n        if(touchingSurface){\n            setY(getY()+5);\n            yVelocity = jumpStrength;\n            touchingSurface = false;\n        }\n    }\n\n    public void moveLeft(){\n        //setX(getX()-speed);\n        lefVelocity += touchingSurface ? speed:(0.25f*speed);\n    }\n\n    public void moveRight(){\n        //setX(getX()+speed);\n        rightVelocity += touchingSurface ? speed:(0.25f*speed);\n    }\n\n    public void act(float deltaTime){\n        if(!touchingSurface) {\n            setY(getY() + yVelocity);\n            yVelocity -= 0.1f;\n        }\n        else{\n            yVelocity = 0;\n        }\n        setX(getX()-lefVelocity);\n        setX(getX()+rightVelocity);\n        lefVelocity = Math.max(0, lefVelocity-(touchingSurface ? 1.75f:1.25f));\n        rightVelocity = Math.max(0, rightVelocity-(touchingSurface ? 1.75f:1.25f));\n        //xVelocity = xVelocity+((xVelocity<0 ? (touchingSurface ? 0.2f:0.1f):(touchingSurface ? -0.2f:-0.1f)));\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java b/core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java
+--- a/core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java	(revision b07891cab4bb8e4baafa1b1bb88663c93218c383)
++++ b/core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java	(date 1747531833241)
+@@ -2,59 +2,32 @@
+ 
+ import com.badlogic.gdx.Gdx;
+ import com.badlogic.gdx.graphics.Texture;
+-import com.badlogic.gdx.graphics.g2d.TextureRegion;
++import com.badlogic.gdx.graphics.g2d.Sprite;
++import com.badlogic.gdx.math.Vector2;
++import com.badlogic.gdx.physics.box2d.*;
+ 
+-public class Player extends GameActor {
++public class Player extends PhysicsActor {
+     //private Sprite sprite;
+-    private static final float speed = 2.75f;
+-    private static final float jumpStrength = 6f;
+-    private float yVelocity;
+-    private float xVelocity;
+-    private float lefVelocity;
+-    private float rightVelocity;
+     //private Body body;
+ 
+-    public Player () {
+-        super(new TextureRegion(new Texture(Gdx.files.internal("Textures/Player.png"))),20, 20,29.4f,59.7f);
+-        //super(world,new Sprite(new Texture(Gdx.files.internal("Textures/Player.png"))), 60, 60,0.3f,0.3f);
+-        //Texture texture = new Texture("textures/Player.png");
+-        //setBounds(sprite.getX()*sprite.getScaleX(), sprite.getY()*sprite.getScaleY(),sprite.getWidth()*sprite.getScaleX(),sprite.getHeight()*sprite.getScaleY());
+-        yVelocity = 0;
+-        xVelocity = 0;
++    public Player (World world) {
++        super(world,new Sprite(new Texture(Gdx.files.internal("Textures/Player.png"))), 60, 60,0.3f,0.3f);
++        setBounds(sprite.getX()*sprite.getScaleX(), sprite.getY()*sprite.getScaleY(),sprite.getWidth()*sprite.getScaleX(),sprite.getHeight()*sprite.getScaleY());
+     }
+ 
+     public void moveUp(){
+         //setY(getY()+speed);
+         //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);
+-        if(touchingSurface){
+-            setY(getY()+5);
+-            yVelocity = jumpStrength;
+-            touchingSurface = false;
+-        }
++        //Nasty Hack
++            //body.applyForceToCenter(new Vector2(0, 500000000), true);
+     }
+ 
+     public void moveLeft(){
+-        //setX(getX()-speed);
+-        lefVelocity += touchingSurface ? speed:(0.25f*speed);
++        body.applyForceToCenter(-50000,0,true);
+     }
+ 
+     public void moveRight(){
+         //setX(getX()+speed);
+-        rightVelocity += touchingSurface ? speed:(0.25f*speed);
+-    }
+-
+-    public void act(float deltaTime){
+-        if(!touchingSurface) {
+-            setY(getY() + yVelocity);
+-            yVelocity -= 0.1f;
+-        }
+-        else{
+-            yVelocity = 0;
+-        }
+-        setX(getX()-lefVelocity);
+-        setX(getX()+rightVelocity);
+-        lefVelocity = Math.max(0, lefVelocity-(touchingSurface ? 1.75f:1.25f));
+-        rightVelocity = Math.max(0, rightVelocity-(touchingSurface ? 1.75f:1.25f));
+-        //xVelocity = xVelocity+((xVelocity<0 ? (touchingSurface ? 0.2f:0.1f):(touchingSurface ? -0.2f:-0.1f)));
++        body.applyForceToCenter(50000,0,true);
+     }
+ }
+Index: core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.RJN.ThroughTheAges;\n\nimport com.badlogic.gdx.math.MathUtils;\nimport com.badlogic.gdx.scenes.scene2d.Actor;\nimport com.badlogic.gdx.scenes.scene2d.Stage;\nimport com.badlogic.gdx.scenes.scene2d.actions.Actions;\nimport com.badlogic.gdx.scenes.scene2d.ui.Skin;\nimport com.badlogic.gdx.scenes.scene2d.ui.TextButton;\nimport com.badlogic.gdx.scenes.scene2d.ui.Window;\nimport com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;\n\n//import static java.awt.SystemColor.window;\n\npublic class MainMenu extends Window{\n    //private Window window;\n    private Main main;\n\n    public MainMenu(Skin skin, Stage stage, Main main){\n        super(\"Main Menu\", skin, \"border\");\n        setWidth(stage.getWidth());\n        setHeight(stage.getHeight());\n        this.main = main;\n        defaults().pad(4f);\n        add(\"ThroughTheAges\").row();\n        final TextButton button = new TextButton(\"Play\", skin);\n        button.pad(8f);\n        button.addListener(new ChangeListener() {\n            @Override\n            public void changed(final ChangeEvent event, final Actor actor) {\n                button.setText(\"Clicked.\");\n                main.advanceStage();\n            }\n        });\n        add(button);\n        pack();\n        setPosition(MathUtils.roundPositive(stage.getWidth() / 2f - getWidth() / 2f),\n            MathUtils.roundPositive(stage.getHeight() / 2f - getHeight() / 2f));\n        addAction(Actions.sequence(Actions.alpha(0f), Actions.fadeIn(1f)));\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java b/core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java
+--- a/core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java	(revision b07891cab4bb8e4baafa1b1bb88663c93218c383)
++++ b/core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java	(date 1747531790324)
+@@ -37,6 +37,4 @@
+             MathUtils.roundPositive(stage.getHeight() / 2f - getHeight() / 2f));
+         addAction(Actions.sequence(Actions.alpha(0f), Actions.fadeIn(1f)));
+     }
+-
+-
+ }

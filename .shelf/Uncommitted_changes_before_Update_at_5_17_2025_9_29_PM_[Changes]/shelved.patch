@@ -1,0 +1,41 @@
+Index: core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.RJN.ThroughTheAges.Actor;\n\nimport com.badlogic.gdx.Gdx;\nimport com.badlogic.gdx.graphics.Texture;\nimport com.badlogic.gdx.graphics.g2d.Sprite;\nimport com.badlogic.gdx.math.Vector2;\nimport com.badlogic.gdx.physics.box2d.*;\n\npublic class Player extends PhysicsActor {\n    //private Sprite sprite;\n    //private Body body;\n\n    public Player (World world) {\n        super(world,new Sprite(new Texture(Gdx.files.internal(\"Textures/Player.png\"))), 60, 60,0.3f,0.3f);\n        setBounds(sprite.getX()*sprite.getScaleX(), sprite.getY()*sprite.getScaleY(),sprite.getWidth()*sprite.getScaleX(),sprite.getHeight()*sprite.getScaleY());\n    }\n\n    public void moveUp(){\n        //setY(getY()+speed);\n        //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);\n        //Nasty Hack\n            body.applyForceToCenter(new Vector2(0, 500000000), true);\n    }\n\n    public void moveLeft(){\n        body.applyForceToCenter(-50000,0,true);\n    }\n\n    public void moveRight(){\n        //setX(getX()+speed);\n        body.applyForceToCenter(50000,0,true);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java b/core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java
+--- a/core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java	(revision fe7dfc9c4da808768052e615d48878d1320d9c65)
++++ b/core/src/main/java/com/RJN/ThroughTheAges/Actor/Player.java	(date 1747521044355)
+@@ -23,11 +23,11 @@
+     }
+ 
+     public void moveLeft(){
+-        body.applyForceToCenter(-50000,0,true);
++        body.applyForceToCenter(-50000000,0,true);
+     }
+ 
+     public void moveRight(){
+         //setX(getX()+speed);
+-        body.applyForceToCenter(50000,0,true);
++        body.applyForceToCenter(50000000,0,true);
+     }
+ }
+Index: core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.RJN.ThroughTheAges;\n\nimport com.badlogic.gdx.math.MathUtils;\nimport com.badlogic.gdx.scenes.scene2d.Actor;\nimport com.badlogic.gdx.scenes.scene2d.Stage;\nimport com.badlogic.gdx.scenes.scene2d.actions.Actions;\nimport com.badlogic.gdx.scenes.scene2d.ui.Skin;\nimport com.badlogic.gdx.scenes.scene2d.ui.TextButton;\nimport com.badlogic.gdx.scenes.scene2d.ui.Window;\nimport com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;\n\n//import static java.awt.SystemColor.window;\n\npublic class MainMenu extends Window{\n    //private Window window;\n    private Main main;\n\n    public MainMenu(Skin skin, Stage stage, Main main){\n        super(\"Main Menu\", skin, \"border\");\n        setWidth(stage.getWidth());\n        setHeight(stage.getHeight());\n        this.main = main;\n        defaults().pad(4f);\n        add(\"ThroughTheAges\").row();\n        final TextButton button = new TextButton(\"Play\", skin);\n        button.pad(8f);\n        button.addListener(new ChangeListener() {\n            @Override\n            public void changed(final ChangeEvent event, final Actor actor) {\n                button.setText(\"Clicked.\");\n                main.advanceStage();\n            }\n        });\n        add(button);\n        pack();\n        setPosition(MathUtils.roundPositive(stage.getWidth() / 2f - getWidth() / 2f),\n            MathUtils.roundPositive(stage.getHeight() / 2f - getHeight() / 2f));\n        addAction(Actions.sequence(Actions.alpha(0f), Actions.fadeIn(1f)));\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java b/core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java
+--- a/core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java	(revision fe7dfc9c4da808768052e615d48878d1320d9c65)
++++ b/core/src/main/java/com/RJN/ThroughTheAges/MainMenu.java	(date 1747520977335)
+@@ -37,6 +37,4 @@
+             MathUtils.roundPositive(stage.getHeight() / 2f - getHeight() / 2f));
+         addAction(Actions.sequence(Actions.alpha(0f), Actions.fadeIn(1f)));
+     }
+-
+-
+ }
