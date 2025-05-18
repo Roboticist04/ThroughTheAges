@@ -18,7 +18,7 @@ public class GameActor extends Actor {
     protected boolean touchingPlayer;
     protected Player player;
     private static final float collisionFudge = 10f;
-    protected static final boolean drawDebug = true;
+    protected static final boolean drawDebug = false;
 
     protected GameActor(TextureRegion region, float x, float y, float width, float height, Player player){
         setBounds(x,y,width,height);

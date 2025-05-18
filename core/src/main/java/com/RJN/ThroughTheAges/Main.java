@@ -1,9 +1,6 @@
 package com.RJN.ThroughTheAges;
 
-import com.RJN.ThroughTheAges.Stages.GameStage;
-import com.RJN.ThroughTheAges.Stages.Stage2;
-import com.RJN.ThroughTheAges.Stages.Stage1;
-import com.RJN.ThroughTheAges.Stages.Stage3;
+import com.RJN.ThroughTheAges.Stages.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -21,16 +18,17 @@ public class Main extends ApplicationAdapter{
     private PolygonSpriteBatch batch;
     private Class[] stages;
     private int stageNumber;
-    private static final int startingStage = 2;
+    private static final int startingStage = 0;
 
     @Override
     public void create() {
         stage = new Stage();
-        stages = new Class[4];
+        stages = new Class[5];
         stages[0] = null;
         stages[1] = Stage1.class;
         stages[2] = Stage2.class;
         stages[3] = Stage3.class;
+        stages[4] = Stage4.class;
         stageNumber = 0;
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         batch = new PolygonSpriteBatch();
