@@ -1,6 +1,7 @@
 package com.RJN.ThroughTheAges.Stages;
 
 import com.RJN.ThroughTheAges.Actor.GameActor;
+import com.RJN.ThroughTheAges.Main;
 import com.RJN.ThroughTheAges.Props.InvisibleCollider;
 import com.RJN.ThroughTheAges.Actor.Player;
 import com.RJN.ThroughTheAges.Props.KillingPlatform;
@@ -21,8 +22,9 @@ import java.util.ArrayList;
 public abstract class GameStage extends Stage{
     protected Player player;
     public static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
+    protected Main main;
 
-    public GameStage() {
+    public GameStage(Main main) {
         super(new StretchViewport(1920,1080));
         player = new Player();
         addListener(new inListener());

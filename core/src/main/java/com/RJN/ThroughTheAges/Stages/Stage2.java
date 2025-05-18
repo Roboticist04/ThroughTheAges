@@ -14,7 +14,7 @@ public class Stage2 extends GameStage{
     private static final Texture statueTexture = new Texture(Gdx.files.internal("textures/Statue.png"));
 
     public Stage2(Main main) {
-        super();
+        super(main);
         //Ground
         addActor(new Platform(groundTexture,0,-20,getWidth()/4.0f,60));
         addActor(new Platform(groundTexture, getWidth()/1.5f, -20,getWidth(),60));
