@@ -70,7 +70,7 @@ public class Main extends ApplicationAdapter{
         stageNumber++;
         stage.dispose();
         if(stageNumber > stages.length-1){
-            JOptionPane.showInputDialog("You win!");
+            JOptionPane.showMessageDialog(null,"You win!");
         }
         else {
             try {
