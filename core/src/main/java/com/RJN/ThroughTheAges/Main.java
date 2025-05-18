@@ -59,9 +59,7 @@ public class Main extends ApplicationAdapter{
     @Override
     public void dispose() {
         //stage.dispose();
-        for(Stage s : stages){
-            s.dispose();
-        }
+        stage.dispose();
         skin.dispose();
     }
 
