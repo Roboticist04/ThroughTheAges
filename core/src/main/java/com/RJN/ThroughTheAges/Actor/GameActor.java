@@ -9,25 +9,24 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class GameActor extends Actor {
-    private Sprite sprite;
+    //private Sprite sprite;
+    private TextureRegion texture;
     protected boolean touchingSurface;
-    private final boolean drawDebug = true;
+    private static final boolean drawDebug = true;
 
-    protected GameActor(Sprite sprite, float x, float y, float xScale, float yScale){
-        sprite.setX(x);
-        sprite.setY(y);
-        setX(x);
-        setY(y);
-        setWidth(sprite.getWidth());
-        setHeight(sprite.getHeight());
-        sprite.setScale(xScale,yScale);
-        this.sprite = sprite;
+    protected GameActor(TextureRegion region, float x, float y, float width, float height){
+        //setX(x);
+        //setY(y);
+        setBounds(x,y,width,height);
+        this.texture = region;
+    }
+
+    protected GameActor(TextureRegion region, float x, float y){
+        this(region,x,y,region.getRegionWidth(),region.getRegionHeight());
     }
 
     public void draw(Batch batch, float parentAlpha){
-        sprite.setX(getX());
-        sprite.setY(getY());
-        sprite.draw(batch);
+        batch.draw(texture,getX(),getY(),getWidth(),getHeight());
         if(drawDebug){
             ShapeDrawer shape = new ShapeDrawer(batch, new TextureRegion(GameStage.whiteTexture));
             shape.rectangle(getX(),getY(),getWidth(),getHeight());

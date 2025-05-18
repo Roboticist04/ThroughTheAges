@@ -2,19 +2,17 @@ package com.RJN.ThroughTheAges.Actor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Player extends GameActor {
     //private Sprite sprite;
     private static final float speed = 5f;
+    private static final float jumpHeight = 200;
     private boolean canJump;
     //private Body body;
 
     public Player () {
-        super(new Sprite(new Texture(Gdx.files.internal("Textures/Player.png"))),20, 20, 0.3f, 0.3f);
+        super(new TextureRegion(new Texture(Gdx.files.internal("Textures/Player.png"))),20, 20);
         canJump = false;
         //super(world,new Sprite(new Texture(Gdx.files.internal("Textures/Player.png"))), 60, 60,0.3f,0.3f);
         //Texture texture = new Texture("textures/Player.png");
@@ -25,7 +23,7 @@ public class Player extends GameActor {
         //setY(getY()+speed);
         //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);
         if(touchingSurface){
-            setY(getY()+speed);
+            setY(getY()+jumpHeight);
         }
     }
 
