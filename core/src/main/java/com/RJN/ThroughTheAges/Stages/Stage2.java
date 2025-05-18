@@ -5,41 +5,33 @@ import com.RJN.ThroughTheAges.Main;
 import com.RJN.ThroughTheAges.Props.Platform;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class Stage2 extends GameStage{
-    private static final Texture groundTexture = new Texture(Gdx.files.internal("textures/ground.png"));
-    private static final Texture platformTexture = new Texture(Gdx.files.internal("textures/platform.png"));
-    private static final Texture statueTexture = new Texture(Gdx.files.internal("textures/Statue.png"));
+import static com.badlogic.gdx.Gdx.graphics;
 
-    public Stage2(Main main) {
+public class Stage2 extends GameStage {
+    private Platform ground;
+    private Flag flag;
+    private final Texture groundTex = new Texture(Gdx.files.internal("textures/ground.png"));
+
+    public Stage2(Main main){
         super(main);
-        backgroundTexture = new Texture(Gdx.files.internal("textures/Stage2Background.png"));
-        //Ground
-        addActor(new Platform(groundTexture,0,-20,getWidth()/4.0f,60));
-        addActor(new Platform(groundTexture, getWidth()/1.5f, -20,getWidth(),60));
-
-        //Platforms
-        addActor(new Platform(platformTexture,getWidth()/4.0f+200,80,128,28));
-        addActor(new Platform(platformTexture,getWidth()/1.5f-300,175,128,28));
-        addActor(new Platform(platformTexture,getWidth()/4.0f+200,300,128,28));
-        addActor(new Platform(platformTexture,getWidth()/1.5f-300,425,128,28));
-        addActor(new Platform(platformTexture,getWidth()/1.5f,statueTexture.getHeight()/2f+60,statueTexture.getWidth()/2f,28));
-
-        //Statue
-        addActor(new Platform(statueTexture,getWidth()/1.5f,40,statueTexture.getWidth()/2f,statueTexture.getHeight()/2f));
-
-        //Flag
-        addActor(new Flag(getWidth()/1.2f,40,64,64,main, player));
+        backgroundTexture = new Texture(Gdx.files.internal("textures/Stage2Backdrop.png"));
+        //super(new FitViewport(1920,1080));
+        //super (new FillViewport(1920,1080));
+        ground = new Platform(groundTex, 0, -20, graphics.getWidth(), 60);
+        addActor(ground);
+        addActor(new Platform(groundTex,200,100,100,30));
+        addActor(new Platform(groundTex,400,250,100,30));
+        addActor(new Platform(groundTex,900,350,100,30));
+        addActor(new Platform(groundTex,1250,475,100,30));
+        addActor(new Platform(groundTex, 1800, 275,100,30));
+        flag = new Flag(1830,315,40,40,main, player);
+        addActor(flag);
     }
-
 
     @Override
     public void dispose() {
         super.dispose();
-        groundTexture.dispose();
-        statueTexture.dispose();
-        platformTexture.dispose();
+        groundTex.dispose();
     }
 }
