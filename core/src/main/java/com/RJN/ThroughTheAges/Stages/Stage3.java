@@ -23,7 +23,7 @@ public class Stage3 extends GameStage{
         addActor(new Platform(platformTexture,1000,600,128,32));
 
         //Flag
-        addActor(new Flag(getWidth()/1.1f,40,64,64,main));
+        addActor(new Flag(getWidth()/1.1f,40,64,64,main,player));
     }
 
     public void dispose(){

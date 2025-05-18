@@ -8,12 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Flag extends GameActor{
     private Main main;
-    public Flag(float x, float y, float width, float height, Main main) {
-        super(new TextureRegion(new Texture(Gdx.files.internal("textures/redSword.png"))), x, y, width, height);
+    public Flag(float x, float y, float width, float height, Main main, Player player) {
+        super(new TextureRegion(new Texture(Gdx.files.internal("textures/redSword.png"))), x, y, width, height, player);
         this.main = main;
     }
-    public void onCollide(Actor a){
-        if(a instanceof Player){
+    public void act(float deltaTime){
+        if(touchingPlayer){
             main.advanceStage();
         }
     }

@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Platform extends GameActor {
 
     public Platform(Texture texture, float x, float y, float width, float height) {
-        super(texture==null ? null:(new TextureRegion(getRepeatingTexture(texture))), x, y, width, height);
+        super(texture==null ? null:(new TextureRegion(getRepeatingTexture(texture))), x, y, width, height, null);
     }
 
     public Platform(Texture tex, float x, float y){

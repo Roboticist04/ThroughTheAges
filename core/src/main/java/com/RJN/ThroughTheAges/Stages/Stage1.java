@@ -29,7 +29,7 @@ public class Stage1 extends GameStage {
         addActor(new Platform(groundTex,900,350,100,30));
         addActor(new Platform(groundTex,1250,475,100,30));
         addActor(new Platform(groundTex, 1800, 275,100,30));
-        flag = new Flag(1830,315,40,40,main);
+        flag = new Flag(1830,315,40,40,main, player);
         addActor(flag);
     }
 

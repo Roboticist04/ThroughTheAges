@@ -30,7 +30,7 @@ public class Stage2 extends GameStage{
         addActor(new Platform(statueTexture,getWidth()/1.5f,40,statueTexture.getWidth()/2f,statueTexture.getHeight()/2f));
 
         //Flag
-        addActor(new Flag(getWidth()/1.2f,40,64,64,main));
+        addActor(new Flag(getWidth()/1.2f,40,64,64,main, player));
     }
 
 

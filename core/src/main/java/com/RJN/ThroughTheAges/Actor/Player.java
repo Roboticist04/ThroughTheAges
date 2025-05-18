@@ -15,7 +15,7 @@ public class Player extends GameActor {
     //private Body body;
 
     public Player () {
-        super(new TextureRegion(new Texture(Gdx.files.internal("Textures/Player.png"))),20, 40,29.4f,59.7f);
+        super(new TextureRegion(new Texture(Gdx.files.internal("Textures/Player.png"))),20, 40,29.4f,59.7f, null);
         //super(world,new Sprite(new Texture(Gdx.files.internal("Textures/Player.png"))), 60, 60,0.3f,0.3f);
         //Texture texture = new Texture("textures/Player.png");
         //setBounds(sprite.getX()*sprite.getScaleX(), sprite.getY()*sprite.getScaleY(),sprite.getWidth()*sprite.getScaleX(),sprite.getHeight()*sprite.getScaleY());
