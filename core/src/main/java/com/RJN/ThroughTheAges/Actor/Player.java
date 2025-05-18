@@ -96,4 +96,7 @@ public class Player extends GameActor {
     public void render(SpriteBatch batch) {
         sprite.draw(batch);
     }
+    public com.badlogic.gdx.math.Rectangle getBoundingRectangle() {
+        return sprite.getBoundingRectangle();
+    }
 }
