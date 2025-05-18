@@ -1,4 +1,4 @@
-package com.RJN.ThroughTheAges.Actor.;
+package com.RJN.ThroughTheAges.Actor;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -6,14 +6,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class movingPlat {
+public class MovingPlatform {
     private Sprite sprite;
     private Vector2 position;
     private Vector2 velocity;
     private Vector2 pointA, pointB;
     private boolean movingToB;
 
-    public movingPlat(Vector2 pointA, Vector2 pointB, float speed) {
+    public MovingPlatform(Vector2 pointA, Vector2 pointB, float speed) {
         this.sprite = new Sprite(new Texture("Textures/Platform.png"));
         this.position = new Vector2(pointA);
         this.velocity = new Vector2(speed, 0);
