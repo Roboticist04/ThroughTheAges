@@ -48,6 +48,21 @@ public class GameStage extends Stage{
         shapeDrawer.setColor(new Color(0,0,1,1));
         shapeDrawer.filledRectangle(0,0,getWidth(),getHeight());
         getBatch().end();
+
+        /*movingPlatform.update(deltaTime);
+    player.update(deltaTime);
+
+    // Check for collisions between player and platform
+    if (movingPlatform.getBounds().overlaps(player.getBounds())) {
+        // Adjust player's position to stand on the platform
+        player.setPosition(movingPlatform.getBounds().x - player.getWidth() / 2, movingPlatform.getBounds().y + movingPlatform.getHeight());
+    }
+
+    batch.begin();
+    movingPlatform.render(batch);
+    player.render(batch);
+    batch.end();*/
+
         super.draw();
     }
 
