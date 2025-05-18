@@ -34,4 +34,11 @@ public class Stage2 extends GameStage{
     }
 
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        groundTexture.dispose();
+        statueTexture.dispose();
+        platformTexture.dispose();
+    }
 }

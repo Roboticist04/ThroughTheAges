@@ -18,7 +18,7 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.ArrayList;
 
-public class GameStage extends Stage{
+public abstract class GameStage extends Stage{
     protected Player player;
     public static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
 
@@ -97,5 +97,9 @@ public class GameStage extends Stage{
                 }
             }
         }
+    }
+
+    public void dispose(){
+        super.dispose();
     }
 }

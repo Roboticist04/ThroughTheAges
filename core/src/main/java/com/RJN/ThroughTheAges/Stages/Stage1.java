@@ -1,10 +1,12 @@
 package com.RJN.ThroughTheAges.Stages;
 
 import com.RJN.ThroughTheAges.Actor.Flag;
+import com.RJN.ThroughTheAges.Actor.GameActor;
 import com.RJN.ThroughTheAges.Main;
 import com.RJN.ThroughTheAges.Props.Platform;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -28,5 +30,11 @@ public class Stage1 extends GameStage {
         addActor(new Platform(groundTex, 1800, 275,100,30));
         flag = new Flag(1830,315,40,40,main);
         addActor(flag);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        groundTex.dispose();
     }
 }
