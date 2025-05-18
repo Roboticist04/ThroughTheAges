@@ -10,10 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Player extends GameActor {
     //private Sprite sprite;
     private static final float speed = 5f;
+    private boolean canJump;
     //private Body body;
 
     public Player () {
         super(new Sprite(new Texture(Gdx.files.internal("Textures/Player.png"))),20, 20, 0.3f, 0.3f);
+        canJump = false;
         //super(world,new Sprite(new Texture(Gdx.files.internal("Textures/Player.png"))), 60, 60,0.3f,0.3f);
         //Texture texture = new Texture("textures/Player.png");
         //setBounds(sprite.getX()*sprite.getScaleX(), sprite.getY()*sprite.getScaleY(),sprite.getWidth()*sprite.getScaleX(),sprite.getHeight()*sprite.getScaleY());
@@ -22,6 +24,9 @@ public class Player extends GameActor {
     public void moveUp(){
         //setY(getY()+speed);
         //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);
+        if(touchingSurface){
+            setY(getY()+speed);
+        }
     }
 
     public void moveLeft(){
@@ -32,4 +37,9 @@ public class Player extends GameActor {
         setX(getX()+speed);
     }
 
+    public void act(float deltaTime){
+        if(!touchingSurface) {
+            setY(getY() - 100 * deltaTime);
+        }
+    }
 }

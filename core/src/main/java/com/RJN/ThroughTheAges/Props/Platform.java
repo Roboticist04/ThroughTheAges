@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Platform extends GameActor {
 
     public Platform(Texture texture, float x, float y, float width, float height) {
-        super(new Sprite(getRepeatingTexture(texture)), x, y, (width/texture.getWidth()), (height/texture.getHeight()));
+        super(new Sprite(getRepeatingTexture(texture)), x, y, (texture.getWidth()/width), (texture.getHeight()/height));
     }
 
     private static Texture getRepeatingTexture(Texture texture){

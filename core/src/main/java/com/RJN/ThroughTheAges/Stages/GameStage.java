@@ -23,7 +23,7 @@ import static com.badlogic.gdx.Gdx.graphics;
 
 public class GameStage extends Stage{
     protected Player player;
-    private static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
+    public static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
     private Platform ground;
 
     public GameStage(Viewport viewport, World world) {
@@ -34,6 +34,7 @@ public class GameStage extends Stage{
         //ground = new Platform(world, 0, 0,new Texture(Gdx.files.internal("textures/ground.png")), getWidth()*2, 20f);
         ground = new Platform(new Texture(Gdx.files.internal("textures/ground.png")), 0, 0, graphics.getWidth(), 20);
         addActor(ground);
+        addActor(player);
     }
 
 
@@ -69,6 +70,15 @@ public class GameStage extends Stage{
     }
 
     public void act(float delta){
+        //super.act();
+        //If actor are moving ticking twice, try removing this loop
+        for(Actor a : getActors()){
+            a.act(delta);
+        }
+        callHit();
+    }
+
+    private void callHit(){
         ArrayList<GameActor> actors = new ArrayList<>();
         for(Actor a : getActors()){
             if(a instanceof GameActor){
@@ -76,8 +86,9 @@ public class GameStage extends Stage{
             }
         }
         for(GameActor a : actors){
+            a.clearTouchingState();
             for(GameActor b : actors){
-                if(a.collidesWith(b)){
+                if(a.collidesWith(b) && a!=b){
                     a.hit(b);
                 }
             }

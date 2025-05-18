@@ -16,7 +16,7 @@ public class TestStage extends GameStage {
         //pushBox = new PushBox(world,500,50);
         platform = new Platform( new Texture(Gdx.files.internal("textures/ground.png")),1000,600, 50, 50);
         //addActor(pushBox);
-        addActor(player);
+        //addActor(player);
         addActor(platform);
 
     }
