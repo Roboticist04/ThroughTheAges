@@ -10,18 +10,20 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import static com.badlogic.gdx.Gdx.graphics;
 
 public class Stage1 extends GameStage {
-    //private PushBox pushBox;
-    private Platform platform;
     private Platform ground;
     private Flag flag;
+    private final Texture groundTex = new Texture(Gdx.files.internal("textures/ground.png"));
 
     public Stage1(Main main){
         super(new FitViewport(1920,1080));
-        platform = new Platform( new Texture(Gdx.files.internal("textures/ground.png")),1000,200, 50, 30);
-        addActor(platform);
-        ground = new Platform(new Texture(Gdx.files.internal("textures/ground.png")), 0, 0, graphics.getWidth(), 20);
+        ground = new Platform(groundTex, 0, -20, graphics.getWidth(), 60);
         addActor(ground);
-        flag = new Flag(1010,221,40,40,main);
+        addActor(new Platform(groundTex,200,100,100,30));
+        addActor(new Platform(groundTex,400,250,100,30));
+        addActor(new Platform(groundTex,900,350,100,30));
+        addActor(new Platform(groundTex,1250,475,100,30));
+        addActor(new Platform(groundTex, 1800, 275,100,30));
+        flag = new Flag(1830,315,40,40,main);
         addActor(flag);
     }
 }

@@ -1,6 +1,7 @@
 package com.RJN.ThroughTheAges.Stages;
 
 import com.RJN.ThroughTheAges.Actor.GameActor;
+import com.RJN.ThroughTheAges.Actor.InvisibleCollider;
 import com.RJN.ThroughTheAges.Actor.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -30,6 +31,13 @@ public class GameStage extends Stage{
         //createGroundBody(world);
         //ground = new Platform(world, 0, 0,new Texture(Gdx.files.internal("textures/ground.png")), getWidth()*2, 20f);
         addActor(player);
+
+        //Left side wall
+        addActor(new InvisibleCollider(-10,0,10,getHeight()));
+        //Right side wall
+        addActor(new InvisibleCollider(getWidth(),0,getWidth()+10,getHeight()));
+        //Ceiling
+        addActor(new InvisibleCollider(0,getHeight(),getWidth(),10));
     }
 
 

@@ -16,7 +16,7 @@ public class GameActor extends Actor {
     protected boolean mayMoveRight;
     protected boolean mayMoveLeft;
     private static final float collisionFudge = 5f;
-    private static final boolean drawDebug = true;
+    protected static final boolean drawDebug = true;
 
     protected GameActor(TextureRegion region, float x, float y, float width, float height){
         //setX(x);
