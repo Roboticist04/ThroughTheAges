@@ -1,6 +1,7 @@
 package com.RJN.ThroughTheAges.Stages;
 
 import com.RJN.ThroughTheAges.Actor.GameActor;
+import com.RJN.ThroughTheAges.Main;
 import com.RJN.ThroughTheAges.Props.InvisibleCollider;
 import com.RJN.ThroughTheAges.Actor.Player;
 import com.RJN.ThroughTheAges.Props.KillingPlatform;
@@ -21,8 +22,9 @@ import java.util.ArrayList;
 public abstract class GameStage extends Stage{
     protected Player player;
     public static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
+    protected Main main;
 
-    public GameStage() {
+    public GameStage(Main main) {
         super(new StretchViewport(1920,1080));
         player = new Player();
         addListener(new inListener());
@@ -48,21 +50,6 @@ public abstract class GameStage extends Stage{
         shapeDrawer.setColor(new Color(0,0,1,1));
         shapeDrawer.filledRectangle(0,0,getWidth(),getHeight());
         getBatch().end();
-
-        /*movingPlatform.update(deltaTime);
-    player.update(deltaTime);
-
-    // Check for collisions between player and platform
-    if (movingPlatform.getBounds().overlaps(player.getBounds())) {
-        // Adjust player's position to stand on the platform
-        player.setPosition(movingPlatform.getBounds().x - player.getWidth() / 2, movingPlatform.getBounds().y + movingPlatform.getHeight());
-    }
-
-    batch.begin();
-    movingPlatform.render(batch);
-    player.render(batch);
-    batch.end();*/
-
         super.draw();
     }
 
