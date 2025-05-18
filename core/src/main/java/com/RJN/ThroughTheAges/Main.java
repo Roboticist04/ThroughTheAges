@@ -21,6 +21,7 @@ public class Main extends ApplicationAdapter{
     private PolygonSpriteBatch batch;
     private Class[] stages;
     private int stageNumber;
+    private static final int startingStage = 2;
 
     @Override
     public void create() {
@@ -76,5 +77,8 @@ public class Main extends ApplicationAdapter{
             throw new IllegalStateException("Failed to construct next stage!");
         }
         Gdx.input.setInputProcessor(stage);
+        for(int i = stageNumber; i < startingStage; i++){
+            advanceStage();
+        }
     }
 }
