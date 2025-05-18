@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Stage2 extends GameStage{
     public Stage2(Viewport viewport, Main main) {
-        super(viewport);
+
     }
 
 

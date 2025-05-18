@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
@@ -24,8 +25,8 @@ public class GameStage extends Stage{
     protected Player player;
     public static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
 
-    public GameStage(Viewport viewport) {
-        super(viewport);
+    public GameStage() {
+        super(new StretchViewport(1920,1080));
         player = new Player();
         addListener(new inListener());
         //createGroundBody(world);
@@ -46,7 +47,7 @@ public class GameStage extends Stage{
         getBatch().begin();
         ShapeDrawer shapeDrawer = new ShapeDrawer(getBatch(), new TextureRegion(whiteTexture));
         shapeDrawer.setColor(new Color(0,0,1,1));
-        shapeDrawer.filledRectangle(0,0,graphics.getWidth(),graphics.getHeight());
+        shapeDrawer.filledRectangle(0,0,getWidth(),getHeight());
         getBatch().end();
         super.draw();
     }
