@@ -81,7 +81,4 @@ public class Player extends GameActor {
 
         //xVelocity = xVelocity+((xVelocity<0 ? (touchingSurface ? 0.2f:0.1f):(touchingSurface ? -0.2f:-0.1f)));
     }
-    public com.badlogic.gdx.math.Rectangle getBoundingRectangle() {
-        return sprite.getBoundingRectangle();
-    }
 }
