@@ -72,7 +72,7 @@ public class Main extends ApplicationAdapter{
             stage = c.newInstance(this);
         }
         catch (Exception e){
-            throw new IllegalStateException("Failed to construct next stage!");
+            throw new RuntimeException(e);
         }
         Gdx.input.setInputProcessor(stage);
         for(int i = stageNumber; i < startingStage; i++){
