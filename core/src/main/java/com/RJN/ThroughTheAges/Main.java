@@ -11,21 +11,23 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.lang.reflect.Constructor;
+
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter{
     private Stage stage;
     private Skin skin;
     private PolygonSpriteBatch batch;
-    private Stage[] stages;
+    private Class[] stages;
     private int stageNumber;
 
     @Override
     public void create() {
         stage = new Stage();
-        stages = new Stage[3];
-        stages[0] = stage;
-        stages[1] = new Stage1(this);
-        stages[2] = new Stage2(this);
+        stages = new Class[3];
+        stages[0] = null;
+        stages[1] = Stage1.class;
+        stages[2] = Stage2.class;
         stageNumber = 0;
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         batch = new PolygonSpriteBatch();
@@ -51,21 +53,26 @@ public class Main extends ApplicationAdapter{
     @Override
     public void resize(int width, int height) {
         //stage.getViewport().update(width, height);
-        stages[stageNumber].getViewport().update(width, height);
+        stage.getViewport().update(width, height);
     }
 
     @Override
     public void dispose() {
         //stage.dispose();
-        for(Stage s : stages){
-            s.dispose();
-        }
+        stage.dispose();
         skin.dispose();
     }
 
     public void advanceStage(){
         stageNumber++;
-        stage = stages[stageNumber];
+        stage.dispose();
+        try {
+            Constructor<Stage> c =stages[stageNumber].getConstructor(this.getClass());
+            stage = c.newInstance(this);
+        }
+        catch (Exception e){
+            throw new IllegalStateException("Failed to construct next stage!");
+        }
         Gdx.input.setInputProcessor(stage);
     }
 }
