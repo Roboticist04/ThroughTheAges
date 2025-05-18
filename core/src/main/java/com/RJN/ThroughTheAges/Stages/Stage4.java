@@ -23,7 +23,7 @@ public class Stage4 extends GameStage {
         addActor(new Platform(platformTexture, getWidth() / 4.0f + 200, 300, 128, 28));
         addActor(new Platform(platformTexture, getWidth() / 1.5f - 300, 425, 128, 28));
         addActor(new Platform(platformTexture, getWidth() / 1.5f, statueTexture.getHeight() / 2f + 60, statueTexture.getWidth() / 2f, 28));
-        addActor(new Platform(statueTexture, getWidth() / 1.5f, 40, statueTexture.getWidth() / 2f, statueTexture.getHeight() / 2f));
+        //addActor(new Platform(statueTexture, getWidth() / 1.5f, 40, statueTexture.getWidth() / 2f, statueTexture.getHeight() / 2f));
         addActor(new Flag(getWidth() / 1.2f, 40, 64, 64, main, player));
 
         //addActor(new MovingPlatform(getWidth() / 4.0f + 100, 200, 80, 28, 100, 0));

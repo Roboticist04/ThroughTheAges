@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import javax.swing.*;
 import java.lang.reflect.Constructor;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -67,16 +69,20 @@ public class Main extends ApplicationAdapter{
     public void advanceStage(){
         stageNumber++;
         stage.dispose();
-        try {
-            Constructor<Stage> c =stages[stageNumber].getConstructor(this.getClass());
-            stage = c.newInstance(this);
+        if(stageNumber > stages.length){
+            JOptionPane.showInputDialog("You win!");
         }
-        catch (Exception e){
-            throw new RuntimeException(e);
-        }
-        Gdx.input.setInputProcessor(stage);
-        for(int i = stageNumber; i < startingStage; i++){
-            advanceStage();
+        else {
+            try {
+                Constructor<Stage> c = stages[stageNumber].getConstructor(this.getClass());
+                stage = c.newInstance(this);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            Gdx.input.setInputProcessor(stage);
+            for (int i = stageNumber; i < startingStage; i++) {
+                advanceStage();
+            }
         }
     }
 }
