@@ -23,7 +23,7 @@ public class GameStage extends Stage{
     protected Player player;
     public static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
 
-    public GameStage(Viewport viewport, World world) {
+    public GameStage(Viewport viewport) {
         super(viewport);
         player = new Player();
         addListener(new inListener());
@@ -84,6 +84,9 @@ public class GameStage extends Stage{
             a.resetAllowedMoves();
             for(GameActor b : actors){
                 a.updateAllowedMoves(b);
+                if(a.collidesWith(b)){
+                    a.onCollide(b);
+                }
             }
         }
     }

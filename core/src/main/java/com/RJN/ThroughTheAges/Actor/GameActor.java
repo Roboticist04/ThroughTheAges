@@ -16,7 +16,7 @@ public class GameActor extends Actor {
     protected boolean mayMoveRight;
     protected boolean mayMoveLeft;
     private static final float collisionFudge = 5f;
-    private static final boolean drawDebug = false;
+    private static final boolean drawDebug = true;
 
     protected GameActor(TextureRegion region, float x, float y, float width, float height){
         //setX(x);
@@ -43,9 +43,7 @@ public class GameActor extends Actor {
         return rect1.overlaps(rect2);
     }
 
-    public boolean onActor(Actor a){
-        return getY() - collisionFudge <= a.getY() + a.getHeight() && getX() + collisionFudge >= a.getY() + a.getHeight();
-    }
+    public void onCollide(Actor a){}
 
     public void updateAllowedMoves(Actor a){
         Rectangle otherActorRect = new Rectangle(a.getX(),a.getY(),a.getWidth(),a.getHeight());

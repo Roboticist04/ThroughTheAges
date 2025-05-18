@@ -1,14 +1,12 @@
 package com.RJN.ThroughTheAges;
 
 import com.RJN.ThroughTheAges.Stages.GameStage;
-import com.RJN.ThroughTheAges.Stages.TestStage;
+import com.RJN.ThroughTheAges.Stages.Stage2;
+import com.RJN.ThroughTheAges.Stages.Stage1;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -17,33 +15,20 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class Main extends ApplicationAdapter{
     private Stage stage;
     private Skin skin;
-    //private Player player;
-    private World world;
-    private float accumulator = 0;
-    private final static float physicsStep = 0.1f;
-    private static final int physicVelocityIterations = 600;
-    private static final int physicsPositionIterations = 600;
     private PolygonSpriteBatch batch;
-    private Box2DDebugRenderer debugRenderer;
     private Stage[] stages;
     private int stageNumber;
 
-
     @Override
     public void create() {
-        world = new World(new Vector2(0, -9.8f), true);
-        //stage = new GameStage(new FitViewport(160, 90), world);
         stage = new Stage();
-        stages = new Stage[2];
+        stages = new Stage[3];
         stages[0] = stage;
-        stages[1] = new TestStage(world);
+        stages[1] = new Stage1(this);
+        stages[2] = new Stage2(stage.getViewport(),this);
         stageNumber = 0;
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
-        //player = new Player(world);
         batch = new PolygonSpriteBatch();
-        debugRenderer = new Box2DDebugRenderer();
-        // We round the window position to avoid awkward half-pixel artifacts.
-        // Casting using (int) would also work.
         stage.addActor(new MainMenu(skin,stage,this));
         Gdx.input.setInputProcessor(stage);
     }
@@ -60,21 +45,7 @@ public class Main extends ApplicationAdapter{
             ((GameStage)(stage)).processInputs();
         }
         batch.end();
-        debugRenderer.render(world,stage.getCamera().combined);
-        updatePhysics(Gdx.graphics.getDeltaTime());
     }
-
-    public void updatePhysics(float deltaTime){
-        // fixed time step
-        // max frame time to avoid spiral of death (on slow devices)
-        float frameTime = Math.min(deltaTime, 0.25f);
-        accumulator += frameTime;
-        while (accumulator >= physicsStep) {
-            world.step(physicsStep, physicVelocityIterations, physicsPositionIterations);
-            accumulator -= physicsStep;
-        }
-    }
-
 
 
     @Override
@@ -85,7 +56,10 @@ public class Main extends ApplicationAdapter{
 
     @Override
     public void dispose() {
-        stage.dispose();
+        //stage.dispose();
+        for(Stage s : stages){
+            s.dispose();
+        }
         skin.dispose();
     }
 
