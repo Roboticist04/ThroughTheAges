@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Player extends GameActor {
     //private Sprite sprite;
-    private static final float speed = 2.75f;
+    private static final float speed = 2f;
     private static final float jumpStrength = 6f;
+    private static final float maxHorizontalSpeed = 5f;
     private float yVelocity;
-    private float xVelocity;
     private float lefVelocity;
     private float rightVelocity;
     //private Body body;
@@ -20,41 +20,57 @@ public class Player extends GameActor {
         //Texture texture = new Texture("textures/Player.png");
         //setBounds(sprite.getX()*sprite.getScaleX(), sprite.getY()*sprite.getScaleY(),sprite.getWidth()*sprite.getScaleX(),sprite.getHeight()*sprite.getScaleY());
         yVelocity = 0;
-        xVelocity = 0;
+        lefVelocity = 0;
+        rightVelocity = 0;
     }
 
     public void moveUp(){
         //setY(getY()+speed);
         //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);
-        if(touchingSurface){
+        if(!mayMoveDown){
             setY(getY()+5);
             yVelocity = jumpStrength;
-            touchingSurface = false;
+            mayMoveUp = true;
         }
     }
 
     public void moveLeft(){
         //setX(getX()-speed);
-        lefVelocity += touchingSurface ? speed:(0.25f*speed);
+        lefVelocity += touchingSurface ? speed:(0.5f*speed);
+        lefVelocity = Math.min(lefVelocity,maxHorizontalSpeed);
     }
 
     public void moveRight(){
         //setX(getX()+speed);
-        rightVelocity += touchingSurface ? speed:(0.25f*speed);
+        rightVelocity += touchingSurface ? speed:(0.5f*speed);
+        rightVelocity = Math.min(rightVelocity,maxHorizontalSpeed);
     }
 
     public void act(float deltaTime){
-        if(!touchingSurface) {
+        if((yVelocity<=0.1 && mayMoveDown)||(yVelocity>0&&mayMoveUp)) {
             setY(getY() + yVelocity);
             yVelocity -= 0.1f;
         }
         else{
             yVelocity = 0;
         }
-        setX(getX()-lefVelocity);
-        setX(getX()+rightVelocity);
-        lefVelocity = Math.max(0, lefVelocity-(touchingSurface ? 1.75f:1.25f));
-        rightVelocity = Math.max(0, rightVelocity-(touchingSurface ? 1.75f:1.25f));
+
+        if (mayMoveRight) {
+            setX(getX()+rightVelocity);
+            rightVelocity = Math.max(0, rightVelocity-(touchingSurface ? 0.8f:0.5f));
+        }
+        else{
+            rightVelocity = 0;
+        }
+
+        if(mayMoveLeft) {
+            setX(getX() - lefVelocity);
+            lefVelocity = Math.max(0, lefVelocity - (touchingSurface ? 0.8f : 0.5f));
+        }
+        else{
+            lefVelocity = 0;
+        }
+
         //xVelocity = xVelocity+((xVelocity<0 ? (touchingSurface ? 0.2f:0.1f):(touchingSurface ? -0.2f:-0.1f)));
     }
 }

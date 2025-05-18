@@ -2,7 +2,6 @@ package com.RJN.ThroughTheAges.Stages;
 
 import com.RJN.ThroughTheAges.Actor.GameActor;
 import com.RJN.ThroughTheAges.Actor.Player;
-import com.RJN.ThroughTheAges.Props.Platform;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -13,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
@@ -24,7 +22,6 @@ import static com.badlogic.gdx.Gdx.graphics;
 public class GameStage extends Stage{
     protected Player player;
     public static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
-    private Platform ground;
 
     public GameStage(Viewport viewport, World world) {
         super(viewport);
@@ -32,8 +29,6 @@ public class GameStage extends Stage{
         addListener(new inListener());
         //createGroundBody(world);
         //ground = new Platform(world, 0, 0,new Texture(Gdx.files.internal("textures/ground.png")), getWidth()*2, 20f);
-        ground = new Platform(new Texture(Gdx.files.internal("textures/ground.png")), 0, 0, graphics.getWidth(), 20);
-        addActor(ground);
         addActor(player);
     }
 
@@ -86,11 +81,9 @@ public class GameStage extends Stage{
             }
         }
         for(GameActor a : actors){
-            a.clearTouchingState();
+            a.resetAllowedMoves();
             for(GameActor b : actors){
-                if(a.collidesWith(b) && a!=b){
-                    a.hit(b);
-                }
+                a.updateAllowedMoves(b);
             }
         }
     }
