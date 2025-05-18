@@ -53,4 +53,11 @@ public class MovingPlatform {
             }
         }
     }
+    public float getWidth() {
+        return getWidth();
+    }
+
+    public float getHeight() {
+        return getHeight();
+    }
 }
