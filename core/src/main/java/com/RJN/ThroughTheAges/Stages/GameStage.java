@@ -23,6 +23,7 @@ public abstract class GameStage extends Stage{
     protected Player player;
     public static final Texture whiteTexture = new Texture(Gdx.files.internal("textures/1WhitePixel.png"));
     protected Main main;
+    protected Texture backgroundTexture = null;
 
     public GameStage(Main main) {
         super(new StretchViewport(1920,1080));
@@ -45,11 +46,18 @@ public abstract class GameStage extends Stage{
 
     @Override
     public void draw(){
-        getBatch().begin();
-        ShapeDrawer shapeDrawer = new ShapeDrawer(getBatch(), new TextureRegion(whiteTexture));
-        shapeDrawer.setColor(new Color(0,0,1,1));
-        shapeDrawer.filledRectangle(0,0,getWidth(),getHeight());
-        getBatch().end();
+        if(backgroundTexture==null) {
+            getBatch().begin();
+            ShapeDrawer shapeDrawer = new ShapeDrawer(getBatch(), new TextureRegion(whiteTexture));
+            shapeDrawer.setColor(new Color(0, 0, 1, 1));
+            shapeDrawer.filledRectangle(0, 0, getWidth(), getHeight());
+            getBatch().end();
+        }
+        else{
+            getBatch().begin();
+            getBatch().draw(backgroundTexture,0,0,getWidth(),getHeight());
+            getBatch().end();
+        }
         super.draw();
     }
 

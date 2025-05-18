@@ -15,6 +15,7 @@ public class Stage2 extends GameStage{
 
     public Stage2(Main main) {
         super(main);
+        backgroundTexture = new Texture(Gdx.files.internal("textures/Stage2Background.png"));
         //Ground
         addActor(new Platform(groundTexture,0,-20,getWidth()/4.0f,60));
         addActor(new Platform(groundTexture, getWidth()/1.5f, -20,getWidth(),60));
