@@ -11,11 +11,17 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Platform extends GameActor {
 
     public Platform(Texture texture, float x, float y, float width, float height) {
-        super(new TextureRegion(getRepeatingTexture(texture)), x, y, width, height);
+        super(texture==null ? null:(new TextureRegion(getRepeatingTexture(texture))), x, y, width, height);
+    }
+
+    public Platform(Texture tex, float x, float y){
+        this(tex,x,y,tex.getWidth(),tex.getHeight());
     }
 
     private static Texture getRepeatingTexture(Texture texture){
-        texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        if(texture!=null) {
+            texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        }
         return texture;
     }
 }

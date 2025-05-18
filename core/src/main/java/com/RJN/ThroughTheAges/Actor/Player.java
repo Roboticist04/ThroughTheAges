@@ -24,6 +24,14 @@ public class Player extends GameActor {
         rightVelocity = 0;
     }
 
+    public void die(){
+        yVelocity = 0;
+        lefVelocity = 0;
+        rightVelocity = 0;
+        setX(20);
+        setY(40);
+    }
+
     public void moveUp(){
         //setY(getY()+speed);
         //body.applyLinearImpulse(0f,speed,getX()-(getWidth()/2),getY()-(getHeight()/2),true);

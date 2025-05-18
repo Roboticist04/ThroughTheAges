@@ -15,7 +15,7 @@ public class GameActor extends Actor {
     protected boolean mayMoveUp;
     protected boolean mayMoveRight;
     protected boolean mayMoveLeft;
-    private static final float collisionFudge = 5f;
+    private static final float collisionFudge = 10f;
     protected static final boolean drawDebug = true;
 
     protected GameActor(TextureRegion region, float x, float y, float width, float height){
@@ -30,7 +30,9 @@ public class GameActor extends Actor {
     }
 
     public void draw(Batch batch, float parentAlpha){
-        batch.draw(texture,getX(),getY(),getWidth(),getHeight());
+        if (texture != null) {
+            batch.draw(texture,getX(),getY(),getWidth(),getHeight());
+        }
         if(drawDebug){
             ShapeDrawer shape = new ShapeDrawer(batch, new TextureRegion(GameStage.whiteTexture));
             shape.rectangle(getX(),getY(),getWidth(),getHeight());

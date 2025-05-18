@@ -25,7 +25,7 @@ public class Main extends ApplicationAdapter{
         stages = new Stage[3];
         stages[0] = stage;
         stages[1] = new Stage1(this);
-        stages[2] = new Stage2(stage.getViewport(),this);
+        stages[2] = new Stage2(this);
         stageNumber = 0;
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         batch = new PolygonSpriteBatch();

@@ -1,25 +1,22 @@
 package com.RJN.ThroughTheAges.Stages;
 
 import com.RJN.ThroughTheAges.Actor.GameActor;
-import com.RJN.ThroughTheAges.Actor.InvisibleCollider;
+import com.RJN.ThroughTheAges.Props.InvisibleCollider;
 import com.RJN.ThroughTheAges.Actor.Player;
+import com.RJN.ThroughTheAges.Props.KillingPlatform;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.ArrayList;
-
-import static com.badlogic.gdx.Gdx.graphics;
 
 public class GameStage extends Stage{
     protected Player player;
@@ -39,6 +36,8 @@ public class GameStage extends Stage{
         addActor(new InvisibleCollider(getWidth(),0,getWidth()+10,getHeight()));
         //Ceiling
         addActor(new InvisibleCollider(0,getHeight(),getWidth(),10));
+        //Death floor
+        addActor(new KillingPlatform(null,0,-100,getWidth(),100));
     }
 
 
