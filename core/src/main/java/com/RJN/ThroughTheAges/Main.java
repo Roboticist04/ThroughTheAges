@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.badlogic.gdx.utils.reflect.Constructor;
 
 import javax.swing.*;
-import java.lang.reflect.Constructor;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter{
@@ -68,21 +69,24 @@ public class Main extends ApplicationAdapter{
 
     public void advanceStage(){
         stageNumber++;
-        stage.dispose();
+        try {
+            stage.dispose();
+        }
+        catch (Exception ignored){}
         if(stageNumber > stages.length-1){
             JOptionPane.showMessageDialog(null,"You win!");
         }
         else {
             try {
-                Constructor<Stage> c = stages[stageNumber].getConstructor(this.getClass());
-                stage = c.newInstance(this);
+                Constructor c = ClassReflection.getConstructor(stages[stageNumber], this.getClass());
+                stage = (Stage) c.newInstance(this);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new GdxRuntimeException("Failed to initialize stage "+stageNumber,e);
             }
-            Gdx.input.setInputProcessor(stage);
             for (int i = stageNumber; i < startingStage; i++) {
                 advanceStage();
             }
+            Gdx.input.setInputProcessor(stage);
         }
     }
 }
